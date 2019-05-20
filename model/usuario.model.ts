@@ -52,7 +52,8 @@ export interface Usuario extends mongoose.Document{
   endereco: EnderecoItem[],
   fotos: FotosItem[],
   avaliacao: AvaliacaoItem[],
-  preferido: PreferidoItem[]
+  preferido: PreferidoItem[],
+  perfil: Object
 }
 
 // export interface UsuarioModel extends mongoose.Model<Usuario>{
