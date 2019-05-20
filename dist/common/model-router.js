@@ -23,8 +23,9 @@ class ModelRouter extends router_1.Router {
                 .catch(next);
         };
         this.findById = (req, resp, next) => {
-            this.prepareOne(this.model.findOne(req.params.id))
-                .then(this.render(resp, next)).catch(next);
+            this.model.findOne()
+    .then(this.render(resp,next))
+    .catch(next)
         };
         this.save = (req, resp, next) => {
             let document = new this.model(req.body);
