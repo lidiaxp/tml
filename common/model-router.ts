@@ -40,8 +40,6 @@ this.model.find()
     this.model.findOne({ _id: req.params.id })
     this.prepareOne(this.model.findOne())
     .then(this.render(resp,next)).catch(next)
-    //this.prepareOne(this.model.findById(req.params.id))
-    //.then(this.render(resp,next)).catch(next)
   }
   // metodo Post
   save = (req,resp,next)=>{
