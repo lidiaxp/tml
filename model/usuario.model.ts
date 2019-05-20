@@ -53,8 +53,7 @@ export interface Usuario extends mongoose.Document{
   fotos: FotosItem[],
   avaliacao: AvaliacaoItem[],
   preferido: PreferidoItem[],
-  perfilProfissional: mongoose.Types.ObjectId | Profissional,
-  perfilSalao: mongoose.Types.ObjectId | Salao
+  perfil: Object
 }
 
 // export interface UsuarioModel extends mongoose.Model<Usuario>{
