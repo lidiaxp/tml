@@ -9,7 +9,7 @@ class ModelRouter extends router_1.Router {
         super();
         this.model = model;
         this.validateId = (req, resp, next) => {
-            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            if (mongoose.Types.ObjectId.isValid(req.params.id)) {
                 next(new restify_errors_1.NotFoundError('Document not found'));
             }
             else {
