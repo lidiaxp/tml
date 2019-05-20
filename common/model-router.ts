@@ -36,8 +36,11 @@ this.model.find()
     .catch(next)
   }
   findById = (req,resp,next)=>{
-    this.prepareOne(this.model.findById(req.params.id))
-    .then(this.render(resp,next)).catch(next)
+    this.model.findOne()
+    .then(this.render(resp,next))
+    .catch(next)
+    //this.prepareOne(this.model.findById(req.params.id))
+    //.then(this.render(resp,next)).catch(next)
   }
   save = (req,resp,next)=>{
     let document = new this.model(req.body)
