@@ -10,13 +10,12 @@ class ModelRouter extends router_1.Router {
         this.model = model;
         this.validateId = (req, resp, next) => {
             if (mongoose.Types.ObjectId.isValid(req.params.id)) {
-                next(new restify_errors_1.NotFoundError('Document not found'));
+                next(new restify_errors_1.NotFoundError('Document not found 2'));
             }
             else {
                 next();
             }
         };
-        //não estou conseguindo usar validação de id nos subdocumentos 
         this.findAll = (req, resp, next) => {
             this.model.find()
                 .then(this.renderAll(resp, next))
@@ -24,8 +23,10 @@ class ModelRouter extends router_1.Router {
         };
         this.findById = (req, resp, next) => {
             this.model.findOne({ _id: req.params.id })
-    .then(this.render(resp,next))
-    .catch(next)
+                .then(this.render(resp, next))
+                .catch(next);
+            //this.prepareOne(this.model.findById(req.params.id))
+            //.then(this.render(resp,next)).catch(next)
         };
         this.save = (req, resp, next) => {
             let document = new this.model(req.body);
@@ -59,15 +60,9 @@ class ModelRouter extends router_1.Router {
                 return next();
             }).catch(next);
         };
-        this.basePath = `/${model.collection.name}`;
     }
     prepareOne(query) {
         return query;
-    }
-    envelope(document) {
-        let resource = Object.assign({ _links: {} }, document.toJSON());
-        resource._links.self = `${this.basePath}/${resource._id}`; // vai dar o nome daquela coleção
-        return resource;
     }
 }
 exports.ModelRouter = ModelRouter;
