@@ -9,7 +9,7 @@ class ProfissionalRouter extends ModelRouter<Profissional> {
   }
 
   applyRoutes(application: restify.Server){
-
+    application.del('/profissional/:id',this.delete)
     application.get('/profissional',this.findAll)
     application.get('/profissional/:id',[this.validateId, this.findById])
     application.post('/profissional', this.save)
