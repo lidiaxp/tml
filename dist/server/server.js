@@ -7,10 +7,9 @@ const error_handler_1 = require("./error.handler");
 class Server {
     initializeDb() {
         mongoose.Promise = global.Promise;
-        return mongoose.connect(process.env.MONGOLAB_URI, function (error) {
-    if (error) console.error(error);
-    else console.log('mongo connected');
-});
+        return mongoose.connect(environment_1.environment.db.url, {
+            useMongoClient: true
+        });
     }
     initRoutes(routers) {
         return new Promise((resolve, reject) => {

@@ -7,7 +7,7 @@ class ProfissionalRouter extends model_router_1.ModelRouter {
         super(profissional_model_1.Profissional);
     }
     applyRoutes(application) {
-        application.del('/profissional/:id',this.delete)
+        application.del('/profissional/:id', this.delete);
         application.get('/profissional', this.findAll);
         application.get('/profissional/:id', [this.validateId, this.findById]);
         application.post('/profissional', this.save);

@@ -37,17 +37,11 @@ this.model.find()
   }
   // metodo get por Id
   findById = (req,resp,next)=>{
-<<<<<<< HEAD
-    this.prepareOne(this.model.findOne())
+    this.prepareOne(this.model.findById(req.params.id))
     .then(this.render(resp,next)).catch(next)
-=======
-    this.model.findOne()
-    .then(this.render(resp,next))
-    .catch(next)
-    //this.prepareOne(this.model.findById(req.params.id))
-    //.then(this.render(resp,next)).catch(next)
->>>>>>> e873f258e66df04e4cc0371ed67ea01bc37227cb
   }
+
+  
   // metodo Post
   save = (req,resp,next)=>{
     let document = new this.model(req.body)

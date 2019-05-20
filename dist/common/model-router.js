@@ -16,21 +16,23 @@ class ModelRouter extends router_1.Router {
                 next();
             }
         };
-        //não estou conseguindo usar validação de id nos subdocumentos 
+        // metodo get
         this.findAll = (req, resp, next) => {
             this.model.find()
                 .then(this.renderAll(resp, next))
                 .catch(next);
         };
+        // metodo get por Id
         this.findById = (req, resp, next) => {
-            this.model.findOne({ _id: req.params.id })
-    .then(this.render(resp,next))
-    .catch(next)
+            this.prepareOne(this.model.findById(req.params.id))
+                .then(this.render(resp, next)).catch(next);
         };
+        // metodo Post
         this.save = (req, resp, next) => {
             let document = new this.model(req.body);
             document.save().then(this.render(resp, next)).catch(next);
         };
+        // metodo Pacht
         this.replace = (req, resp, next) => {
             const options = { runValidators: true, overwrite: true };
             this.model.update({ _id: req.params.id }, req.body, options).exec().then(result => {
@@ -42,6 +44,7 @@ class ModelRouter extends router_1.Router {
                 }
             }).then(this.render(resp, next)).catch(next);
         };
+        // metodo update
         this.update = (req, resp, next) => {
             const options = { runValidators: true, new: true };
             this.model.findByIdAndUpdate(req.params.id, req.body, options)
@@ -59,15 +62,9 @@ class ModelRouter extends router_1.Router {
                 return next();
             }).catch(next);
         };
-        this.basePath = `/${model.collection.name}`;
     }
     prepareOne(query) {
         return query;
-    }
-    envelope(document) {
-        let resource = Object.assign({ _links: {} }, document.toJSON());
-        resource._links.self = `${this.basePath}/${resource._id}`; // vai dar o nome daquela coleção
-        return resource;
     }
 }
 exports.ModelRouter = ModelRouter;

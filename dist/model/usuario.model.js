@@ -18,7 +18,7 @@ const enderecoSchema = new mongoose.Schema({
     cep: {
         type: String,
         required: true,
-        maxlength: 12
+        maxlength: 8
     },
     numero: {
         type: String,
