@@ -44,8 +44,9 @@ export interface PreferidoItem extends mongoose.Document{
 
 export interface Usuario extends mongoose.Document{
   nome: String,
-  rg: String,
-  cpf: String,
+  email: String,
+  senha: String
+  /*cpf: String,
   codigo: String,
   nascimento: String,
   contatos: ContatosItem[],
@@ -53,7 +54,7 @@ export interface Usuario extends mongoose.Document{
   fotos: FotosItem[],
   avaliacao: AvaliacaoItem[],
   preferido: PreferidoItem[],
-  perfil: Object
+  perfil: Object*/
 }
 
 // export interface UsuarioModel extends mongoose.Model<Usuario>{
@@ -149,7 +150,7 @@ const preferidoSchema = new mongoose.Schema({
     select: false
   }
 })
-
+/*
 const usuarioSchema = new mongoose.Schema({
   nome:{
     type: String,
@@ -216,7 +217,7 @@ const usuarioSchema = new mongoose.Schema({
     ref: 'Salao',
     required: false
   }
-})
+})*/
 
 // usuarioSchema.static.findByPreferido = function(preferido: mongoose.Schema.Types.ObjectId){
 //   return this.findOne({preferido})

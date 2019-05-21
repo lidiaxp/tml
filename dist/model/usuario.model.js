@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
-const validators_1 = require("../common/validators");
 // export interface UsuarioModel extends mongoose.Model<Usuario>{
 //   findByPreferido(preferido:mongoose.Types.ObjectId | Usuario): Promise<Usuario>
 // }
@@ -89,73 +88,74 @@ const preferidoSchema = new mongoose.Schema({
         select: false
     }
 });
+/*
 const usuarioSchema = new mongoose.Schema({
-    nome: {
-        type: String,
-        required: true,
-        maxlength: 40,
-        minlength: 1
-    },
-    rg: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    cpf: {
-        type: String,
-        require: false,
-        validate: {
-            validator: validators_1.validateCPF,
-            message: '{PATH}: Invalid CPF({VALUE})'
-        }
-    },
-    codigo: {
-        type: String,
-        required: true,
-        unique: true,
-        maxlength: 10,
-        minlength: 2
-    },
-    nascimento: {
-        type: String,
-        required: true
-    },
-    contatos: {
-        type: [contatosSchema],
-        required: false,
-        select: false
-    },
-    endereco: {
-        type: [enderecoSchema],
-        required: false,
-        select: false
-    },
-    fotos: {
-        type: [fotosSchema],
-        required: false,
-        select: false
-    },
-    avaliacao: {
-        type: [avaliacaoSchema],
-        required: false,
-        select: false
-    },
-    preferido: {
-        type: [preferidoSchema],
-        required: false,
-        select: false
-    },
-    perfilProfissional: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profissao',
-        required: false
-    },
-    perfilSalao: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Salao',
-        required: false
+  nome:{
+    type: String,
+    required: true,
+    maxlength: 40,
+    minlength: 1
+  },
+  rg:{
+    type:String,
+    required: true,
+    unique: true
+  },
+  cpf:{
+    type: String,
+    require: false,
+    validate:{
+      validator: validateCPF,
+      message:'{PATH}: Invalid CPF({VALUE})'
     }
-});
+  },
+  codigo:{
+    type:String,
+    required: true,
+    unique: true,
+    maxlength: 10,
+    minlength: 2
+  },
+  nascimento:{
+    type: String,
+    required: true
+  },
+  contatos:{
+    type:[contatosSchema],
+    required: false,
+    select: false
+  },
+  endereco:{
+    type:[enderecoSchema],
+    required: false,
+    select: false
+  },
+  fotos:{
+    type:[fotosSchema],
+    required: false,
+    select: false
+  },
+  avaliacao:{
+    type:[avaliacaoSchema],
+    required: false,
+    select: false
+  },
+  preferido:{
+    type:[preferidoSchema],
+    required: false,
+    select: false
+  },
+  perfilProfissional:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Profissao',
+    required: false
+  },
+  perfilSalao:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Salao',
+    required: false
+  }
+})*/
 // usuarioSchema.static.findByPreferido = function(preferido: mongoose.Schema.Types.ObjectId){
 //   return this.findOne({preferido})
 // }
