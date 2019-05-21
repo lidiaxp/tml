@@ -16,11 +16,7 @@ const profissionalSchema = new mongoose.Schema({
     select: true,
     enum:['Maquiadora','Manicure','Cabelereira', 'Barbeiro','Esteticista','Tatoadora']
   },
-  tipo:{
-    type: String,
-    required: false,
-    select: false
-  },
+
   comentarios:{
     type: String,
     required: true,
