@@ -9,7 +9,7 @@ class ModelRouter extends router_1.Router {
         super();
         this.model = model;
         this.validateId = (req, resp, next) => {
-            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            if (mongoose.Types.ObjectId.isValid(req.params.id)) {
                 next(new restify_errors_1.NotFoundError('Document not found 2'));
             }
             else {
@@ -24,8 +24,11 @@ class ModelRouter extends router_1.Router {
         };
         // metodo get por Id
         this.findById = (req, resp, next) => {
-            this.prepareOne(this.model.findById(req.params.id))
+            this.model.findOne({ _id: req.params.id });
+            this.prepareOne(this.model.findOne())
                 .then(this.render(resp, next)).catch(next);
+            //this.prepareOne(this.model.findById(req.params.id))
+            //.then(this.render(resp,next)).catch(next)
         };
         // metodo Post
         this.save = (req, resp, next) => {

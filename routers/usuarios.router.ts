@@ -10,15 +10,6 @@ class UsuarioRouter extends ModelRouter<Usuario> {
     super(Usuario)
   }
 
-
-
-  
-
-
-
-
-
-
   findContatos = (req,resp,next)=>{
     Usuario.findById(req.params.id, "+contatos").then(cont=>{
       if(!cont){
@@ -29,6 +20,7 @@ class UsuarioRouter extends ModelRouter<Usuario> {
       }
     }).catch(next)
   }
+
   replaceContatos = (req,resp,next)=>{
   Usuario.findById(req.params.id).then(rest=>{
     if(!rest){
@@ -53,6 +45,7 @@ findEndereco = (req,resp,next)=>{
     }
   }).catch(next)
 }
+
 replaceEndereco = (req,resp,next)=>{
 Usuario.findById(req.params.id).then(usu=>{
   if(!usu){
@@ -77,6 +70,7 @@ findAvaliacao = (req,resp,next)=>{
     }
   }).catch(next)
 }
+
 replaceAvaliacao = (req,resp,next)=>{
 Usuario.findById(req.params.id).then(ava=>{
   if(!ava){
@@ -101,6 +95,7 @@ findFotos = (req,resp,next)=>{
     }
   }).catch(next)
 }
+
 replaceFotos = (req,resp,next)=>{
 Usuario.findById(req.params.id).then(fot=>{
   if(!fot){
@@ -134,12 +129,7 @@ findById = (req,resp,next)=>{
 
 }*/
 
-
-
   applyRoutes(application: restify.Server){
-
-    
-   
     application.get('/usuario',this.findAll)
     application.get('/usuario/:id',[this.validateId, this.findById])
     application.post('/usuario', this.save)
@@ -158,11 +148,6 @@ findById = (req,resp,next)=>{
 
     application.get('/usuario/:id/fotos', [this.validateId, this.findFotos])
     application.put('/usuario/:id/fotos', [this.validateId, this.replaceFotos])
-
-    
-
-
-
   }
 }
 
