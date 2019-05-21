@@ -33,7 +33,9 @@ export interface Usuario extends mongoose.Document{
   status: Boolean,
   perfil: Number,
   contatos: String[],
-  localizacao: LocalizacaoItem[]
+  localizacao: LocalizacaoItem[],
+  recomendado1: String[],
+  recomendado2: String[]
 }
 
 const enderecoSchema = new mongoose.Schema({
@@ -109,6 +111,12 @@ const usuarioSchema = new mongoose.Schema({
   localizacao:{
     type: [localizacaoSchema]
   },
+  recomendado1:{
+    type: [String]
+  },
+  recomendado2:{
+    type: [String]
+  }
 })
 
 export const Usuario = mongoose.model<Usuario>('Usuario', usuarioSchema)

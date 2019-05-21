@@ -72,5 +72,11 @@ const usuarioSchema = new mongoose.Schema({
     localizacao: {
         type: [localizacaoSchema]
     },
+    recomendado1: {
+        type: [String]
+    },
+    recomendado2: {
+        type: [String]
+    }
 });
 exports.Usuario = mongoose.model('Usuario', usuarioSchema);
