@@ -150,7 +150,7 @@ const preferidoSchema = new mongoose.Schema({
     select: false
   }
 })
-/*
+
 const usuarioSchema = new mongoose.Schema({
   nome:{
     type: String,
@@ -158,7 +158,13 @@ const usuarioSchema = new mongoose.Schema({
     maxlength: 40,
     minlength: 1
   },
-  rg:{
+  email:{
+    type: String,
+  }, 
+  senha:{
+    type: String,
+  }
+  /*rg:{
     type:String,
     required: true,
     unique: true
@@ -216,8 +222,8 @@ const usuarioSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Salao',
     required: false
-  }
-})*/
+  }*/
+})
 
 // usuarioSchema.static.findByPreferido = function(preferido: mongoose.Schema.Types.ObjectId){
 //   return this.findOne({preferido})
