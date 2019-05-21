@@ -22,27 +22,33 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
 
 
   validateId = (req,resp,next)=>{
-    if(!mongoose.Types.ObjectId.isValid(req.params.id)){
-      next(new NotFoundError('Document not found'))
+    if(mongoose.Types.ObjectId.isValid(req.params.id)){
+      next(new NotFoundError('Document not found 2'))
     }else{
      next()
     }
   }
   
-
+  // metodo get
   findAll = (req,resp,next)=>{
 this.model.find()
     .then(this.renderAll(resp,next))
     .catch(next)
   }
+  // metodo get por Id
   findById = (req,resp,next)=>{
-    this.prepareOne(this.model.findById(req.params.id))
+    this.model.findOne({ _id: req.params.id })
+    this.prepareOne(this.model.findOne())
     .then(this.render(resp,next)).catch(next)
+    //this.prepareOne(this.model.findById(req.params.id))
+    //.then(this.render(resp,next)).catch(next)
   }
+  // metodo Post
   save = (req,resp,next)=>{
     let document = new this.model(req.body)
     document.save().then(this.render(resp,next)).catch(next)
   }
+  // metodo Pacht
   replace =  (req, resp, next)=>{
     const options =  {runValidators: true, overwrite: true}
     this.model.update({_id:req.params.id}, req.body, options).exec().then(result=>{
@@ -53,6 +59,7 @@ this.model.find()
       }
     }).then(this.render(resp,next)).catch(next)
   }
+  // metodo update
   update = (req,resp,next)=>{
     const options = {runValidators: true, new:true}
     this.model.findByIdAndUpdate(req.params.id, req.body, options)
