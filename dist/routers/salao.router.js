@@ -33,8 +33,8 @@ class SalaoRouter extends model_router_1.ModelRouter {
         };
     }
     applyRoutes(application) {
-        application.get(`${this.basePath}`, this.findAll);
-        application.get(`${this.basePath}/:id`, [this.validateId, this.findById]);
+        application.get('/salao', this.findAll);
+        application.get('/salao/:id', [this.validateId, this.findById]);
         application.post('/salao', this.save);
         application.put('/salao/:id', [this.validateId, this.replace]);
         application.patch('/salao/:id', [this.validateId, this.update]);

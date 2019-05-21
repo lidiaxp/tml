@@ -16,7 +16,6 @@ class ModelRouter extends router_1.Router {
                 next();
             }
         };
-        //não estou conseguindo usar validação de id nos subdocumentos 
         this.findAll = (req, resp, next) => {
             this.model.find()
                 .then(this.renderAll(resp, next))
@@ -58,15 +57,9 @@ class ModelRouter extends router_1.Router {
                 return next();
             }).catch(next);
         };
-        this.basePath = `/${model.collection.name}`;
     }
     prepareOne(query) {
         return query;
-    }
-    envelope(document) {
-        let resource = Object.assign({ _links: {} }, document.toJSON());
-        resource._links.self = `${this.basePath}/${resource._id}`; // vai dar o nome daquela coleção
-        return resource;
     }
 }
 exports.ModelRouter = ModelRouter;

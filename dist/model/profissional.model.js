@@ -1,22 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
-const profissionalSchema = new mongoose.Schema({
+const preferidoSchema = new mongoose.Schema({
+    saloes: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
+    }
+});
+const profissaoSchema = new mongoose.Schema({
     servico: {
         type: String,
+        required: true
+    }
+});
+const profissionalSchema = new mongoose.Schema({
+    usuario: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        select: true,
-        enum: ['Maquiadora', 'Manicure', 'Cabelereira', 'Barbeiro', 'Esteticista', 'Tatoadora']
+        ref: 'usuario'
     },
-    tipo: {
-        type: String,
-        required: false,
-        select: false
+    profissao: {
+        type: [profissaoSchema],
+        required: true
     },
-    comentarios: {
+    foto_perfil: {
         type: String,
-        required: true,
-        select: true
+        required: false
+    },
+    preferido: {
+        type: [preferidoSchema],
+        required: false
     }
 });
 exports.Profissional = mongoose.model('Profissional', profissionalSchema);
