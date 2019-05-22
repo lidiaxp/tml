@@ -43,7 +43,8 @@ const usuarioSchema = new mongoose.Schema({
         type: String
     },
     cpf: {
-        type: String
+        type: String,
+        unique: true
     },
     codigo: {
         type: String
