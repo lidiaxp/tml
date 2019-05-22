@@ -21,7 +21,6 @@ class Server {
                 };
                 this.application = restify.createServer(options);
                 const corsOptions = {
-                    preflightMaxAge: 86400,
                     origins: ['*'],
                     allowHeaders: ['authorization'],
                     exposeHeaders: ['x-custom-header']
