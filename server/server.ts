@@ -41,14 +41,6 @@ export class Server{
         this.application.use(cors.actual)
         this.application.use(restify.plugins.queryParser())
         this.application.use(restify.plugins.bodyParser())
-        
-        this.application.use(
-          function crossOrigin(req,res,next){
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "X-Requested-With");
-            return next();
-          }
-        );
 
         //rotas
         for(let router of routers){
