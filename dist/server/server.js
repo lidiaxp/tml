@@ -21,23 +21,11 @@ class Server {
                 });
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
-                //this.application.use(restify.CORS())
-                this.application.opts(/.*/, function (req, res, next) {
+                this.application.use(function crossOrigin(req, res, next) {
                     res.header("Access-Control-Allow-Origin", "*");
-                    res.header("Access-Control-Allow-Methods", req.header("Access-Control-Request-Method"));
-                    res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
-                    res.send(200);
+                    res.header("Access-Control-Allow-Headers", "X-Requested-With");
                     return next();
                 });
-                /*const cors = corsMiddleware({
-                  origins: ["*"],
-                  allowHeaders: ["Authorization"],
-                  exposeHeaders: ["Authorization"]
-                });
-        
-                this.application.pre(cors.preflight);
-                this.application.use(cors.actual);
-        */
                 //rotas
                 for (let router of routers) {
                     router.applyRoutes(this.application);
