@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 import {environment} from '../common/environment'
 import {Router} from '../common/router'
 import{handlerError} from './error.handler'
-//import * as corsMiddleware from "restify-cors-middleware";  
+import * as corsMiddleware from "restify-cors-middleware" 
 
 
 
@@ -21,12 +21,24 @@ export class Server{
   initRoutes(routers: Router[]): Promise<any>{
     return new Promise((resolve, reject)=>{
       try{
+        const options: restify.ServerOptions = {
+          name: 'nail-hear',
+          version: '1.0.0'
+        }
 
-        this.application = restify.createServer({
-          name:'nail-hear',
-          version:'1.0.0'
-        })
+        this.application = restify.createServer(options)
 
+        const corsOptions: corsMiddleware.Options = {
+          preflightMaxAge: 86400,
+          origins: ['*'],
+          allowHeaders: ['authorization'],
+          exposeHeaders: ['x-custom-header']
+        }
+        const cors: corsMiddleware.CorsMiddleware = corsMiddleware(corsOptions)
+
+        this.application.pre(cors.preflight)
+
+        this.application.use(cors.actual)
         this.application.use(restify.plugins.queryParser())
         this.application.use(restify.plugins.bodyParser())
         

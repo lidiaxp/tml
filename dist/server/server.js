@@ -4,7 +4,7 @@ const restify = require("restify"); // carregando o arquivo restify
 const mongoose = require("mongoose");
 const environment_1 = require("../common/environment");
 const error_handler_1 = require("./error.handler");
-//import * as corsMiddleware from "restify-cors-middleware";  
+const corsMiddleware = require("restify-cors-middleware");
 class Server {
     initializeDb() {
         mongoose.Promise = global.Promise;
@@ -15,10 +15,20 @@ class Server {
     initRoutes(routers) {
         return new Promise((resolve, reject) => {
             try {
-                this.application = restify.createServer({
+                const options = {
                     name: 'nail-hear',
                     version: '1.0.0'
-                });
+                };
+                this.application = restify.createServer(options);
+                const corsOptions = {
+                    preflightMaxAge: 86400,
+                    origins: ['*'],
+                    allowHeaders: ['authorization'],
+                    exposeHeaders: ['x-custom-header']
+                };
+                const cors = corsMiddleware(corsOptions);
+                this.application.pre(cors.preflight);
+                this.application.use(cors.actual);
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
                 this.application.use(function crossOrigin(req, res, next) {
