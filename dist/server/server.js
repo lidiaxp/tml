@@ -4,7 +4,7 @@ const restify = require("restify"); // carregando o arquivo restify
 const mongoose = require("mongoose");
 const environment_1 = require("../common/environment");
 const error_handler_1 = require("./error.handler");
-const corsMiddleware = require("restify-cors-middleware");
+//import * as corsMiddleware from "restify-cors-middleware";  
 class Server {
     initializeDb() {
         mongoose.Promise = global.Promise;
@@ -29,14 +29,17 @@ class Server {
                   res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
                   res.send(200);
                   return next();
-              });*/
+              });
+        
                 const cors = corsMiddleware({
-                    origins: ["*"],
-                    allowHeaders: ["Authorization"],
-                    exposeHeaders: ["Authorization"]
+                  origins: ["*"],
+                  allowHeaders: ["Authorization"],
+                  exposeHeaders: ["Authorization"]
                 });
+        
                 this.application.pre(cors.preflight);
                 this.application.use(cors.actual);
+        */
                 //rotas
                 for (let router of routers) {
                     router.applyRoutes(this.application);

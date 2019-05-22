@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 import {environment} from '../common/environment'
 import {Router} from '../common/router'
 import{handlerError} from './error.handler'
-import * as corsMiddleware from "restify-cors-middleware";  
+//import * as corsMiddleware from "restify-cors-middleware";  
 
 
 
@@ -37,7 +37,7 @@ export class Server{
           res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
           res.send(200);
           return next();
-      });*/
+      });
 
         const cors = corsMiddleware({  
           origins: ["*"],
@@ -47,7 +47,7 @@ export class Server{
 
         this.application.pre(cors.preflight);  
         this.application.use(cors.actual);  
-
+*/
         //rotas
         for(let router of routers){
           router.applyRoutes(this.application)
