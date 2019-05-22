@@ -4,6 +4,8 @@ import * as bcrypt from 'bcrypt'
 import {environment} from '../common/environment'
 import{Profissional} from './profissional.model'
 import{Salao} from './salao.model'
+import{Avaliacao} from './avaliacao.model'
+import{Denuncia} from './denuncia.model'
 
 export interface EnderecoItem extends mongoose.Document{
   rua: String,
@@ -35,7 +37,9 @@ export interface Usuario extends mongoose.Document{
   contatos: String[],
   localizacao: LocalizacaoItem[],
   recomendado1: String[],
-  recomendado2: String[]
+  recomendado2: String[],
+  avaliacao: mongoose.Types.ObjectId | Avaliacao,
+  denuncia: mongoose.Types.ObjectId | Denuncia
 }
 
 const enderecoSchema = new mongoose.Schema({
@@ -116,6 +120,12 @@ const usuarioSchema = new mongoose.Schema({
   },
   recomendado2:{
     type: [String]
+  }, 
+  avaliacao:{
+    type:mongoose.Schema.Types.ObjectId
+  }, 
+  denuncia:{
+    type:mongoose.Schema.Types.ObjectId
   }
 })
 

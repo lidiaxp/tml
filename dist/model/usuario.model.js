@@ -77,6 +77,12 @@ const usuarioSchema = new mongoose.Schema({
     },
     recomendado2: {
         type: [String]
+    },
+    avaliacao: {
+        type: mongoose.Schema.Types.ObjectId
+    },
+    denuncia: {
+        type: mongoose.Schema.Types.ObjectId
     }
 });
 exports.Usuario = mongoose.model('Usuario', usuarioSchema);
