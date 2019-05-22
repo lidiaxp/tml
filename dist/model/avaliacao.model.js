@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const avaliacaoSchema = new mongoose.Schema({
     avaliador: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     },
     avaliado: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     },
     nota: {
         type: Number
