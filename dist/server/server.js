@@ -21,7 +21,7 @@ class Server {
                 });
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
-                this.application.use(restify.CORS());
+                //this.application.use(restify.CORS())
                 this.application.opts(/.*/, function (req, res, next) {
                     res.header("Access-Control-Allow-Origin", "*");
                     res.header("Access-Control-Allow-Methods", req.header("Access-Control-Request-Method"));
