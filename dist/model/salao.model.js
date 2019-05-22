@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
-const bson_1 = require("bson");
 // aplicando os Schemas
 // schema de salão Franquia
 const franquiaSchema = new mongoose.Schema({
@@ -76,7 +75,7 @@ const salaoSchema = new mongoose.Schema({
         type: Date
     },
     selecionarHora: {
-        type: bson_1.Timestamp
+        type: Date
     },
     comentarios: {
         type: String

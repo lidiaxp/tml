@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose'
-import { Timestamp } from 'bson';
+//import { Timestamp } from 'bson';
 import { Usuario } from './usuario.model';
 
 // Criação do dados de Salão e Franquia por Mairton Leal
@@ -43,7 +43,7 @@ export interface Salao extends mongoose.Document{
   fotoSalao:String[], // aqui será armazenado fotos para o salão
   salasDisponiveis: Number, // quantidade a ser disponivel de Salões
   selecionarDias: Date, // Agendar os dias que o salao irá funcionar dos serviços a serem alocados
-  selecionarHora: Timestamp, // Selecionar a hora dos dias de funcionamento do Salão
+  selecionarHora: Date, // Selecionar a hora dos dias de funcionamento do Salão
   comentarios: String, // Comentarios sobre salão como ex: Recentemente construido, Com Materias novos etc.
   statusSalao: boolean, // Status do salão que possui espaços ocupados e disponiveis para o serviço
   estadoMaterial: String[], // status do material que será utilizado ex: Regular, Novo, Já utilizado etc.
@@ -139,7 +139,7 @@ const salaoSchema = new mongoose.Schema({
     type:Date
   },
   selecionarHora:{
-    type:Timestamp
+    type:Date
   },
   comentarios:{
     type:String

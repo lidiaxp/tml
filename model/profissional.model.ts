@@ -32,25 +32,11 @@ const profissionalSchema = new mongoose.Schema({
     required: true,
     ref:'usuario'
   },
-<<<<<<< HEAD
 
   comentarios:{
     type: String,
     required: true,
     select: true
-=======
-  profissao:{
-    type: [profissaoSchema],
-    required:true
-  },
-  foto_perfil:{
-    type:String,
-    required: false
-  },
-  preferido:{
-    type:[preferidoSchema],
-    required: false
->>>>>>> 6bcd82685cdfd720102483465016c6043a211afa
   }
 
 })
