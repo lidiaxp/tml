@@ -33,13 +33,17 @@ class SalaoRouter extends model_router_1.ModelRouter {
         };
     }
     applyRoutes(application) {
+        // CRUD basico
         application.get('/salao', this.findAll);
         application.get('/salao/:id', [this.validateId, this.findById]);
         application.post('/salao', this.save);
         application.put('/salao/:id', [this.validateId, this.replace]);
         application.patch('/salao/:id', [this.validateId, this.update]);
+        application.del('/salao/:id', [this.validateId, this.delete]);
+        // rotas para atualizar o kit
         application.get('/salao/:id/kit', [this.validateId, this.findKit]);
         application.put('/salao/:id/kit', [this.validateId, this.findKit]);
+        application.post('/salao/:id/kit', this.save);
     }
 }
 exports.salaoRouter = new SalaoRouter();

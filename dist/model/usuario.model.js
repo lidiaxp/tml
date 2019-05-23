@@ -55,6 +55,9 @@ const usuarioSchema = new mongoose.Schema({
     saldoConta: {
         type: Number
     },
+    fotoPerfil: {
+        type: [Number]
+    },
     endereco: {
         type: [enderecoSchema]
     },

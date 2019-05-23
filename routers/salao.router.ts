@@ -2,9 +2,9 @@ import * as mongoose from 'mongoose'
 import * as restify from 'restify'
 import{NotFoundError} from 'restify-errors'
 import{ModelRouter} from '../common/model-router'
-import{Salao} from '../model/salao.model'
+import{SalaoFranquia, Salao} from '../model/salao.model'
 
-class SalaoRouter extends ModelRouter<Salao>{
+class SalaoRouter extends ModelRouter<SalaoFranquia>{
   constructor(){
     super(Salao)
   }
@@ -20,6 +20,7 @@ class SalaoRouter extends ModelRouter<Salao>{
         }
       }).catch(next)
     }
+
     replaceKit = (req,resp,next)=>{
       Salao.findById(req.params.id).then(salao=>{
         if(!salao){
@@ -37,15 +38,18 @@ class SalaoRouter extends ModelRouter<Salao>{
 
 
   applyRoutes(application: restify.Server){
-
+    // CRUD basico
     application.get('/salao',this.findAll)
     application.get('/salao/:id',[this.validateId, this.findById])
     application.post('/salao', this.save)
     application.put('/salao/:id',[this.validateId, this.replace])
     application.patch('/salao/:id',[this.validateId, this.update])
+    application.del('/salao/:id',[this.validateId, this.delete])
 
+    // rotas para atualizar o kit
     application.get('/salao/:id/kit',[this.validateId, this.findKit])
     application.put('/salao/:id/kit',[this.validateId, this.findKit])
+    application.post('/salao/:id/kit', this.save)
 
 
 

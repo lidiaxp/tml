@@ -72,13 +72,13 @@ const salaoSchema = new mongoose.Schema({
         type: Boolean
     },
     fotoSalao: {
-        type: String
+        type: Number
     },
     fotoBanner: {
-        type: String
+        type: Number
     },
     fotoBancadas: {
-        type: String
+        type: Number
     },
     historicoSalao: {
         type: String,

@@ -45,9 +45,9 @@ export interface SalaoFranquia extends mongoose.Document{
 
   enderecoSalao: String, // adicionar endereço do salão simples
   redeSocial: String, // aqui para linkar atalhos de instagram,Facebook da rede social do salão para visita 
-  fotoSalao:String[], // aqui será armazenado fotos para o salão
-  fotoBancadas: String[], // aqui será para fotos das bancadas comentadas com Alexandre
-  fotoBanner: String[], //aqui será para fotos das Banners de faixa da frente comentadas com Alexandre
+  fotoSalao:Number[], // aqui será armazenado fotos para o salão
+  fotoBancadas: Number[], // aqui será para fotos das bancadas comentadas com Alexandre
+  fotoBanner: Number[], //aqui será para fotos das Banners de faixa da frente comentadas com Alexandre
   bancas: [    // array para armazenamento do tipo do serviço e status disponivel, ocupado.
     {
       tipo: String,
@@ -150,13 +150,13 @@ const salaoSchema = new mongoose.Schema({
     type:Boolean
   },
   fotoSalao:{
-  type:String
+  type:Number
   },
   fotoBanner:{
-  type:String
+  type:Number
   },
   fotoBancadas:{
-  type:String
+  type:Number
   },
   historicoSalao:{
     type:String,

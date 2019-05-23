@@ -73,7 +73,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                     throw new restify_errors_1.NotFoundError('Sem Avaliação');
                 }
                 else {
-                    ava.fotos = req.body; // um array
+                    ava.fotoPerfil = req.body; // um array
                     return ava.save();
                 }
             }).then(ava => {
@@ -87,7 +87,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                     throw new restify_errors_1.NotFoundError('Usuario não encontrado');
                 }
                 else {
-                    resp.json(fot.fotos);
+                    resp.json(fot.fotoPerfil);
                     return next();
                 }
             }).catch(next);
@@ -98,7 +98,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                     throw new restify_errors_1.NotFoundError('Usuario não encontrado');
                 }
                 else {
-                    fot.fotos = req.body; // um array
+                    fot.fotoPerfil = req.body; // um array
                     return fot.save();
                 }
             }).then(fot => {

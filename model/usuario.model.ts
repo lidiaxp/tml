@@ -32,6 +32,7 @@ export interface Usuario extends mongoose.Document{
   saldoConta: Number,
   endereco: EnderecoItem[],
   concaCorrente: String,
+  fotoPerfil: Number[],
   status: Boolean,
   perfil: Number,
   contatos: String[],
@@ -97,6 +98,9 @@ const usuarioSchema = new mongoose.Schema({
   },
   saldoConta:{
     type: Number
+  },
+  fotoPerfil:{
+    type: [Number]
   },
   endereco:{
     type: [enderecoSchema]
