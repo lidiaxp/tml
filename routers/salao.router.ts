@@ -60,7 +60,7 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
     }
 
     insereKit = (req, resp, next)=>{
-      Salao.findById(req.params.id).then(salao=>{
+      Salao.findById(req.params.id, "+kit").then(salao=>{
         let document = new this.model(req.body)
         document.save().then(this.render(resp,next)).catch(next)  
       })
