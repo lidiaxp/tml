@@ -9,7 +9,7 @@ class Router extends events_1.EventEmitter {
     render(response, next) {
         return (document) => {
             if (document) {
-                //this.emit('beforeRender', document)
+                this.emit('beforeRender', document);
                 response.json(this.envelope(document));
             }
             else {
