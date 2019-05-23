@@ -57,7 +57,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
             }).catch(next);
         };
         this.insereKit = (req, resp, next) => {
-            salao_model_1.Salao.findById(req.params.id, "+kit").then(salao => {
+            salao_model_1.Salao.create(req.params.id, "+kit").then(salao => {
                 let document = new this.model(req.body);
                 document.save().then(this.render(resp, next)).catch(next);
             });
