@@ -9,22 +9,22 @@ class UsuarioRouter extends ModelRouter<Usuario> {
   constructor(){
     super(Usuario)
   }
-
+   // rota de encontrar contatos 
   findContatos = (req,resp,next)=>{
     Usuario.findById(req.params.id, "+contatos").then(cont=>{
       if(!cont){
-        throw new NotFoundError('Usuario não encontrado')
+        throw new NotFoundError('Contato não encontrado')
       }else{
         resp.json(cont.contatos)
         return next()
       }
     }).catch(next)
   }
-
+  // rota de atualizar dados de contatos 
   replaceContatos = (req,resp,next)=>{
   Usuario.findById(req.params.id).then(rest=>{
     if(!rest){
-      throw new NotFoundError('Usuario não encontrado')
+      throw new NotFoundError('Contato não encontrado')
     }else{
       rest.contatos = req.body // um array
       return rest.save()
@@ -34,22 +34,15 @@ class UsuarioRouter extends ModelRouter<Usuario> {
     return next()
   }).catch(next)
 }
+// rota de adicionar endereços
 
-findEndereco = (req,resp,next)=>{
-  Usuario.findById(req.params.id, "+endereco").then(cont=>{
-    if(!cont){
-      throw new NotFoundError('Usuario não encontrado')
-    }else{
-      resp.json(cont.endereco)
-      return next()
-    }
-  }).catch(next)
-}
 
+
+// rota de atualizar endereços
 replaceEndereco = (req,resp,next)=>{
 Usuario.findById(req.params.id).then(usu=>{
   if(!usu){
-    throw new NotFoundError('Usuario não encontrado')
+    throw new NotFoundError('Endereço não encontrado')
   }else{
     usu.endereco = req.body // um array
     return usu.save()
@@ -60,6 +53,9 @@ Usuario.findById(req.params.id).then(usu=>{
 }).catch(next)
 }
 
+<<<<<<< HEAD
+// rota de encontrar fotos já adicionadas
+=======
 findAvaliacao = (req,resp,next)=>{
   Usuario.findById(req.params.id, "+avaliacao").then(ava=>{
     if(!ava){
@@ -85,6 +81,7 @@ Usuario.findById(req.params.id).then(ava=>{
 }).catch(next)
 }
 
+>>>>>>> ffa502b02f84cdbf8c89d91744b3ac7c4eafa6ba
 findFotos = (req,resp,next)=>{
   Usuario.findById(req.params.id, "+fotos").then(fot=>{
     if(!fot){
@@ -96,6 +93,8 @@ findFotos = (req,resp,next)=>{
   }).catch(next)
 }
 
+
+// rota de atualizar as fotos 
 replaceFotos = (req,resp,next)=>{
 Usuario.findById(req.params.id).then(fot=>{
   if(!fot){
@@ -110,13 +109,23 @@ Usuario.findById(req.params.id).then(fot=>{
 }).catch(next)
 }
 
-findById = (req,resp,next)=>{
-  this.model.findById(req.params.id)
-  .populate('Salao', 'espaco, salas, comentarios, precoHora, kit')
-  .populate('Profissao', 'servico, tipo, comentario')
-  .then(this.render(resp,next))
-  .catch(next)
-}
+
+
+
+
+// referencia a outro model no caso do Salão e do Profissional
+// a primeira são das collections e por segundo são dos atributos
+// findById = (req,resp,next)=>{
+//   this.model.findById(req.params.id)
+//   .populate('Salao', 'espaco, salas, comentarios, precoHora, kit')
+//   .populate('Profissao', 'servico, tipo, comentario')
+//   .then(this.render(resp,next))
+//   .catch(next)
+// }
+
+
+
+
 
 /*findByPreferido = (req,resp,next)=>{ // problema de versão. Não estou conseguindo usar a rota de procurar primeiro por email
   if(req.query.preferido){
@@ -130,24 +139,44 @@ findById = (req,resp,next)=>{
 }*/
 
   applyRoutes(application: restify.Server){
+    //  rotas de cadastro do usuário
     application.get('/usuario',this.findAll)
     application.get('/usuario/:id',[this.validateId, this.findById])
     application.post('/usuario', this.save)
     application.put('/usuario/:id',[this.validateId, this.replace])
     application.patch('/usuario/:id',[this.validateId, this.update])
     application.del('/usuario/:id',[this.validateId, this.delete])
-
+    
+    // rotas de acesso de contatos 
     application.get('/usuario/:id/contatos', [this.validateId, this.findContatos])
+    application.post('/usuario/:id/contatos', [this.validateId, this.save])
     application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos])
+   
+    // rotas de acesso ao endereço
 
-    application.get('/usuario/:id/endereco',[this.validateId,  this.findEndereco])
     application.put('/usuario/:id/endereco', [this.validateId, this.replaceEndereco])
 
-    application.get('/usuario/:id/avaliacao',[this.validateId,  this.findAvaliacao])
-    application.put('/usuario/:id/avaliacao', [this.validateId, this.replaceAvaliacao])
 
-    application.get('/usuario/:id/fotos', [this.validateId, this.findFotos])
-    application.put('/usuario/:id/fotos', [this.validateId, this.replaceFotos])
+   
+    //rotas de avaliaçao
+    
+
+    // rotas de acesso denuncia
+
+
+    //rotas de acesso a Tarefas 
+
+
+    // rotas de model de portifolios
+
+
+
+
+
+
+   
+
+
   }
 }
 
