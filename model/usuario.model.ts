@@ -35,6 +35,7 @@ export interface Usuario extends mongoose.Document{
   fotoPerfil: Number[],
   status: Boolean,
   perfil: Number,
+  fotoPerfil: Number[],
   contatos: String[],
   localizacao: LocalizacaoItem[],
   recomendado1: String[],
@@ -89,6 +90,9 @@ const usuarioSchema = new mongoose.Schema({
   cpf:{
     type: String,
     unique: true
+  },
+  foto:{
+    type:[Number]
   },
   codigo:{
     type: String
