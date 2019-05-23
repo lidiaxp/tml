@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose'
-//import { Timestamp } from 'bson';
 import { Usuario } from './usuario.model';
 
 // Criação do dados de Salão e Franquia por Mairton Leal
@@ -10,16 +9,8 @@ export interface KitItem extends mongoose.Document{
   quantidade: String, // quantidade em litros ou materiais 
   qualidade: String  // estado do serviço do material se está em Bom Estado, Regular etc.
 }
- 
-// Criando  de Salão Franquia
-export interface FranquiaSalao extends mongoose.Document{
-  nomefranquia: String, // Nome da Franquia de Salões como Marca da Empresa
-  quantidadeFranquia:Number, // quantidade de saloes para o usuário
-  enderecoFranquias: mongoose.Types.ObjectId | Salao, // Endereço das Franquias a adicionar
-
-}
-
- // Criando dados Cartao Salao e Franquia
+  
+// Criando dados Cartao Salao e Franquia
  export interface InfoCartao extends mongoose.Document{
   saldoVirtual: Number,
   contaCorrente:String,
@@ -35,48 +26,53 @@ export interface FranquiaSalao extends mongoose.Document{
 
 
 // Criando o Salão simples
-export interface Salao extends mongoose.Document{
+export interface SalaoFranquia extends mongoose.Document{
+  nomefranquia: String, // Nome da Franquia de Salões como Marca da Empresa
+  quantidadeFranquia:Number, // quantidade de saloes para o usuário
+  enderecoFranquias: [{
+    nomefranquia:{
+      type: String,
+    },
+    quantidadeFranquia:{
+      type:Number,
+      minlength:1
+    },
+    enderecoFranquias:{
+      type:String
+    }
+  }]
   idSalao: String, // codigo do salão ao ser criado
-  codigoSalao: String, // Codigo que salão podera compartilhar
+
   enderecoSalao: String, // adicionar endereço do salão simples
   redeSocial: String, // aqui para linkar atalhos de instagram,Facebook da rede social do salão para visita 
   fotoSalao:String[], // aqui será armazenado fotos para o salão
-  salasDisponiveis: Number, // quantidade a ser disponivel de Salões
+  fotoBancadas: String[], // aqui será para fotos das bancadas comentadas com Alexandre
+  fotoBanner: String[], //aqui será para fotos das Banners de faixa da frente comentadas com Alexandre
+  bancas: [    // array para armazenamento do tipo do serviço e status disponivel, ocupado.
+    {
+      tipo: String,
+      status: boolean
+    }
+  ], // quantidade a ser disponivel de Salões
   selecionarDias: Date, // Agendar os dias que o salao irá funcionar dos serviços a serem alocados
   selecionarHora: Date, // Selecionar a hora dos dias de funcionamento do Salão
+  horaIntervalo: Date, // Inserindo intervalo em que o salao fica fechado ou pausa para o almoço
   comentarios: String, // Comentarios sobre salão como ex: Recentemente construido, Com Materias novos etc.
-  statusSalao: boolean, // Status do salão que possui espaços ocupados e disponiveis para o serviço
-  estadoMaterial: String[], // status do material que será utilizado ex: Regular, Novo, Já utilizado etc.
+
   kit: KitItem[], // descrever materias que atendem ao serviço do salão  
   estacionamento: boolean, // descrever se salão possui/ou não estacionamento para o profissional
-  aceitarAluguel:boolean, // varivavel de aceitar pedido do profissional para aluguel
-  precoHora: Number, // preço a cobrar para o salão
-  cobrarAtraso: Boolean, // cobrança de Multa para o profissional que atrasar na hora
+  tipo: String, // qual plano esta utilizando: Vip,premium
   dadosCartao: InfoCartao[], // informar dados do cartao como saldo e nome do cartao
-  historicoSalao: String[], // Historico de alugueis do profissional
+  historicoSalao: [{
+    registro: String,
+    hora: Date
+  }], // Historico de alugueis do profissional
   preferido: ProfPreferido[], // lista de profissionais preferidos
-  franquia: FranquiaSalao[] // dados a preencher em caso de mais de um salão
+ 
 
 }
 
 // aplicando os Schemas
-
-// schema de salão Franquia
-const franquiaSchema = new mongoose.Schema({
-  nomefranquia:{
-    type: String,
-  },
-  quantidadeFranquia:{
-    type:Number,
-    maxlength: 5,
-    minlength:2
-  },
-  enderecoFranquias:{
-    type:String
-  }
-
-})
-// schema de conta do salão
 const contaSalaoSchema = new mongoose.Schema({
   saldoVirtual:{
     type: Number,
@@ -116,72 +112,71 @@ const kitSchema = new mongoose.Schema({
   }
 })
 const preferidoSchema = new mongoose.Schema({
-preferidos: {
+preferido: {
   type:mongoose.Schema.Types.ObjectId,
   required: false
 }
 })
+
 // schema principal
 const salaoSchema = new mongoose.Schema({
   idSalao:{
-    type: String,
+    type: String
   
   },
-  salasDisponiveis:{
-    type: Number,
-    required: true
+  bancas:{
+    type: String,
+    status:Boolean
   },
+
   precoHora:{
     type: Number,
     required: true
+  },
+  tipo:{
+    type:String
   },
   selecionarDias:{
     type:Date
   },
   selecionarHora:{
-    type:Date
+    type:Timestamp
   },
   comentarios:{
     type:String
   },
-  statusSalao:{
-    type:Boolean
-  },
-  estadoMaterial:{
-    type:String
-  },
+ 
   estacionamento:{
     type:Boolean
   },
-  aceitarAluguel:{
-    type:Boolean
+  fotoSalao:{
+  type:String
   },
-  cobrarAtraso:{
-    type:Boolean
+  fotoBanner:{
+  type:String
+  },
+  fotoBancadas:{
+  type:String
   },
   historicoSalao:{
     type:String,
-
+    hora: Date
   },
   preferido:{
     type:[preferidoSchema],
     required: false
   },
-  
+
   kit:{
     type:[kitSchema],
     tipodeKit: String,
     quantidade: String,
-    default: []
-  },
-  franquia:{
-    type:[franquiaSchema],
-
+    default: [],
   },
   dadosCartao:{
-    type:[contaSalaoSchema],
+    type:[contaSalaoSchema]
   }
 
 })
 
-export const Salao = mongoose.model<Salao>('Salao', salaoSchema)
+export const Salao = mongoose.model<SalaoFranquia>('Salao', salaoSchema)

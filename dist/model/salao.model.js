@@ -2,21 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 // aplicando os Schemas
-// schema de salão Franquia
-const franquiaSchema = new mongoose.Schema({
-    nomefranquia: {
-        type: String,
-    },
-    quantidadeFranquia: {
-        type: Number,
-        maxlength: 5,
-        minlength: 2
-    },
-    enderecoFranquias: {
-        type: String
-    }
-});
-// schema de conta do salão
 const contaSalaoSchema = new mongoose.Schema({
     saldoVirtual: {
         type: Number,
@@ -53,7 +38,7 @@ const kitSchema = new mongoose.Schema({
     }
 });
 const preferidoSchema = new mongoose.Schema({
-    preferidos: {
+    preferido: {
         type: mongoose.Schema.Types.ObjectId,
         required: false
     }
@@ -61,42 +46,43 @@ const preferidoSchema = new mongoose.Schema({
 // schema principal
 const salaoSchema = new mongoose.Schema({
     idSalao: {
-        type: String,
+        type: String
     },
-    salasDisponiveis: {
-        type: Number,
-        required: true
+    bancas: {
+        type: String,
+        status: Boolean
     },
     precoHora: {
         type: Number,
         required: true
     },
+    tipo: {
+        type: String
+    },
     selecionarDias: {
         type: Date
     },
     selecionarHora: {
-        type: Date
+        type: Timestamp
     },
     comentarios: {
-        type: String
-    },
-    statusSalao: {
-        type: Boolean
-    },
-    estadoMaterial: {
         type: String
     },
     estacionamento: {
         type: Boolean
     },
-    aceitarAluguel: {
-        type: Boolean
+    fotoSalao: {
+        type: String
     },
-    cobrarAtraso: {
-        type: Boolean
+    fotoBanner: {
+        type: String
+    },
+    fotoBancadas: {
+        type: String
     },
     historicoSalao: {
         type: String,
+        hora: Date
     },
     preferido: {
         type: [preferidoSchema],
@@ -106,13 +92,10 @@ const salaoSchema = new mongoose.Schema({
         type: [kitSchema],
         tipodeKit: String,
         quantidade: String,
-        default: []
-    },
-    franquia: {
-        type: [franquiaSchema],
+        default: [],
     },
     dadosCartao: {
-        type: [contaSalaoSchema],
+        type: [contaSalaoSchema]
     }
 });
 exports.Salao = mongoose.model('Salao', salaoSchema);
