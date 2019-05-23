@@ -12,7 +12,7 @@ export abstract class Router extends EventEmitter{
   render(response: restify.Response, next:restify.Next){
     return (document)=>{
       if(document){
-        //this.emit('beforeRender', document)
+        this.emit('beforeRender', document)
         response.json(this.envelope(document))
       }else{
         throw new NotFoundError('Documento não encontrado')
