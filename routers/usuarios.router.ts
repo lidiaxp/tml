@@ -53,35 +53,7 @@ Usuario.findById(req.params.id).then(usu=>{
 }).catch(next)
 }
 
-<<<<<<< HEAD
 // rota de encontrar fotos já adicionadas
-=======
-findAvaliacao = (req,resp,next)=>{
-  Usuario.findById(req.params.id, "+avaliacao").then(ava=>{
-    if(!ava){
-      throw new NotFoundError('Sem avaliação')
-    }else{
-      resp.json(ava.avaliacao)
-      return next()
-    }
-  }).catch(next)
-}
-
-replaceAvaliacao = (req,resp,next)=>{
-Usuario.findById(req.params.id).then(ava=>{
-  if(!ava){
-    throw new NotFoundError('Sem Avaliação')
-  }else{
-    ava.fotoPerfil = req.body // um array
-    return ava.save()
-  }
-}).then(ava=>{
-  resp.json(ava.avaliacao)
-  return next()
-}).catch(next)
-}
-
->>>>>>> ffa502b02f84cdbf8c89d91744b3ac7c4eafa6ba
 findFotos = (req,resp,next)=>{
   Usuario.findById(req.params.id, "+fotos").then(fot=>{
     if(!fot){
@@ -150,10 +122,11 @@ Usuario.findById(req.params.id).then(fot=>{
     // rotas de acesso de contatos 
     application.get('/usuario/:id/contatos', [this.validateId, this.findContatos])
     application.post('/usuario/:id/contatos', [this.validateId, this.save])
+    
     application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos])
    
     // rotas de acesso ao endereço
-
+    application.get('/usuario/:id', [this.validateId, this.findById])
     application.put('/usuario/:id/endereco', [this.validateId, this.replaceEndereco])
 
 

@@ -49,6 +49,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                 return next();
             }).catch(next);
         };
+        // rota de encontrar fotos já adicionadas
         this.findFotos = (req, resp, next) => {
             usuario_model_1.Usuario.findById(req.params.id, "+fotos").then(fot => {
                 if (!fot) {
@@ -108,6 +109,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
         application.post('/usuario/:id/contatos', [this.validateId, this.save]);
         application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos]);
         // rotas de acesso ao endereço
+        application.get('/usuario/:id', [this.validateId, this.findById]);
         application.put('/usuario/:id/endereco', [this.validateId, this.replaceEndereco]);
         //rotas de avaliaçao
         // rotas de acesso denuncia
