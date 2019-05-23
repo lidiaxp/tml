@@ -44,7 +44,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
             }).catch(next);
         };
         this.replaceKit = (req, resp, next) => {
-            salao_model_1.Salao.findById(req.params.id).then(salao => {
+            salao_model_1.Salao.findById(req.params.id, "+kit", req.params.id2).then(salao => {
                 if (!salao) {
                     throw new restify_errors_1.NotFoundError('Kit não encontrado');
                 }
@@ -205,9 +205,9 @@ class SalaoRouter extends model_router_1.ModelRouter {
         application.post('/salao/:id/dono', this.save);
         // rotas para atualizar o kit
         application.get('/salao/:id/kit', [this.validateId, this.findKit]);
-        application.put('/salao/:id/kit/:id', [this.validateId, this.replaceKit]);
-        application.del('/salao/:id/kit/:id', [this.validateId, this.delete]);
-        application.patch('/salao/:id/kit/:id', [this.validateId, this.update]);
+        application.put('/salao/:id/kit/:id2', [this.validateId, this.replaceKit]);
+        application.del('/salao/:id/kit/:id2', [this.validateId, this.delete]);
+        application.patch('/salao/:id/kit/:id2', [this.validateId, this.update]);
         application.post('/salao/:id/kit', this.save);
         // rotas para atualizar o endereco franquia
         application.get('/salao/:id/endereco', [this.validateId, this.findEnderecoFranquia]);
