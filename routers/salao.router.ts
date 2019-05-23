@@ -52,7 +52,7 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
         if(!salao){
           throw new NotFoundError('Kit não encontrado')
         }else{
-          salao.kit = req.body // um array
+          salao.kit = req.body 
           return salao.save()
         }
       }).then(salao=>{
@@ -60,27 +60,35 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
         return next()
       }).catch(next)
     }
-
-    /*insereKit = (req, resp, next)=>{
-      Salao.create(req.params.id, "+kit").then(salao=>{
-        let document = new this.model(req.body)
-        document.save().then(this.render(resp,next)).catch(next)  
-      })
-    }*/
-
     
     insereKit = (req, resp, next)=>{
-      Salao.findById(req.params.id, "+kit").then(salao=>{
-        if(!salao){
-          throw new NotFoundError('Kit não encontrado')
-        }else{
-          salao.kit.includes(req.body)
-          return salao.save()
+      
+      // Salao.save(req.params.id, "+kit").then(salao=>{
+      //   if(!salao){
+      //     throw new NotFoundError('Kit não encontrado')
+      //   }else{
+      //     salao.kit.includes(req.body)
+      //     return salao.save()
+      //   }
+      // }).then(salao=>{
+      //   resp.json(salao.kit)
+      //   return next()
+      // }).catch(next)
+      var articleModel = new this.model(req.body);
+      articleModel.save(function(err, article) {
+        if (err) {
+            resp.status(500);
+            resp.json({
+                type: false,
+                data: "Erro ocorrido: " + err
+            })
+        } else {
+            resp.json({
+                type: true,
+                data: article
+            })
         }
-      }).then(salao=>{
-        resp.json(salao.kit)
-        return next()
-      }).catch(next)
+    })
     }
      
 
