@@ -47,7 +47,7 @@ export class Server{
           methods: ['GET','PUT','DELETE','POST','OPTIONS']
         }));
           
-        this.application.opts('/\.*/', corsHandler, optionsRoute);*/
+        this.application.opts('/\./', corsHandler, optionsRoute);*/
 
         const corsOptions: corsMiddleware.Options = {
           origins: ['*'],
