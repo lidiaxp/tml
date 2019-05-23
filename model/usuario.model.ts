@@ -32,7 +32,7 @@ export interface Usuario extends mongoose.Document{
   saldoConta: Number,
   endereco: EnderecoItem[],
   concaCorrente: String,
-  fotoPerfil: Number[],
+  fotoPerfil: String,
   status: Boolean,
   perfil: Number,
   contatos: String[],// colocar um array com tipo 
@@ -103,7 +103,7 @@ const usuarioSchema = new mongoose.Schema({
     type: Number
   },
   fotoPerfil:{
-    type: [Number]
+    type: String
   },
   endereco:{
     type: [enderecoSchema]

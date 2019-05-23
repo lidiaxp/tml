@@ -49,7 +49,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
                     throw new restify_errors_1.NotFoundError('Kit não encontrado');
                 }
                 else {
-                    salao.kit = req.body; // um array
+                    salao.kit = req.body;
                     return salao.save();
                 }
             }).then(salao => {
@@ -57,25 +57,34 @@ class SalaoRouter extends model_router_1.ModelRouter {
                 return next();
             }).catch(next);
         };
-        /*insereKit = (req, resp, next)=>{
-          Salao.create(req.params.id, "+kit").then(salao=>{
-            let document = new this.model(req.body)
-            document.save().then(this.render(resp,next)).catch(next)
-          })
-        }*/
         this.insereKit = (req, resp, next) => {
-            salao_model_1.Salao.findById(req.params.id, "+kit").then(salao => {
-                if (!salao) {
-                    throw new restify_errors_1.NotFoundError('Kit não encontrado');
+            // Salao.save(req.params.id, "+kit").then(salao=>{
+            //   if(!salao){
+            //     throw new NotFoundError('Kit não encontrado')
+            //   }else{
+            //     salao.kit.includes(req.body)
+            //     return salao.save()
+            //   }
+            // }).then(salao=>{
+            //   resp.json(salao.kit)
+            //   return next()
+            // }).catch(next)
+            var articleModel = new this.model(req.body);
+            articleModel.save(function (err, article) {
+                if (err) {
+                    resp.status(500);
+                    resp.json({
+                        type: false,
+                        data: "Erro ocorrido: " + err
+                    });
                 }
                 else {
-                    salao.kit.includes(req.body);
-                    return salao.save();
+                    resp.json({
+                        type: true,
+                        data: article
+                    });
                 }
-            }).then(salao => {
-                resp.json(salao.kit);
-                return next();
-            }).catch(next);
+            });
         };
         this.findEnderecoFranquia = (req, resp, next) => {
             salao_model_1.Salao.findById(req.params.id, "+endereco").then(salao => {

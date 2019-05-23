@@ -59,7 +59,7 @@ const usuarioSchema = new mongoose.Schema({
         type: Number
     },
     fotoPerfil: {
-        type: [Number]
+        type: String
     },
     endereco: {
         type: [enderecoSchema]

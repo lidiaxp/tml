@@ -120,13 +120,14 @@ Usuario.findById(req.params.id).then(fot=>{
     application.del('/usuarios/:id',[this.validateId, this.delete])
     
     // rotas de acesso de contatos 
-    application.get('/usuarios/:id/contatos', [this.validateId, this.findContatos])
-    application.post('/usuarios/:id/contatos', [this.validateId, this.save])
-    application.put('/usuarios/:id/contatos', [this.validateId, this.replaceContatos])
+    application.get('/usuario/:id/contatos', [this.validateId, this.findContatos])
+  
+
+    application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos])
    
     // rotas de acesso ao endereço
-
-    application.put('/usuarios/:id/endereco', [this.validateId, this.replaceEndereco])
+    application.get('/usuario/:id/endereco', [this.validateId, this.findById])
+    application.put('/usuario/:id/endereco', [this.validateId, this.replaceEndereco])
 
 
    
