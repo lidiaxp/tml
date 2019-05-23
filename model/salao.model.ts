@@ -26,6 +26,7 @@ export interface KitItem extends mongoose.Document{
 
 // Criando o Salão simples
 export interface SalaoFranquia extends mongoose.Document{
+  dono: mongoose.Types.ObjectId | Usuario,
   nomefranquia: String, // Nome da Franquia de Salões como Marca da Empresa
   quantidadeFranquia:Number, // quantidade de saloes para o usuário
   enderecoFranquias: [{
@@ -115,6 +116,9 @@ preferido: {
 
 // schema principal
 const salaoSchema = new mongoose.Schema({
+  dono:{
+    type: mongoose.Schema.Types.ObjectId
+  },
   idSalao:{
     type: String
   

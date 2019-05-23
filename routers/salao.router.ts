@@ -9,7 +9,31 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
     super(Salao)
   }
 
+  findDono = (req,resp,next)=>{
+    Salao.findById(req.params.id, "+dono").then(salao=>{
+      if(!salao){
+        throw new NotFoundError('Dono não encontrado')
+      }else{
+        resp.json(salao.dono)
+        return next()
+      }
+    }).catch(next)
+  }
 
+  replaceDono = (req,resp,next)=>{
+    Salao.findById(req.params.id).then(salao=>{
+      if(!salao){
+        throw new NotFoundError('Dono não encontrado')
+      }else{
+        salao.kit = req.body 
+        return salao.save()
+      }
+    }).then(salao=>{
+      resp.json(salao.dono)
+      return next()
+    }).catch(next)
+  }
+  
   findKit = (req,resp,next)=>{
       Salao.findById(req.params.id, "+kit").then(salao=>{
         if(!salao){
@@ -36,8 +60,10 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
     }
 
     insereKit = (req, resp, next)=>{
-      let document = new this.model(req.body)
-
+      Salao.findById(req.params.id).then(salao=>{
+        let document = new this.model(req.body)
+        document.save().then(this.render(resp,next)).catch(next)  
+      })
     }
 
     findEnderecoFranquia = (req,resp,next)=>{
@@ -174,6 +200,13 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
     application.patch('/salao/:id',[this.validateId, this.update])
     application.del('/salao/:id',[this.validateId, this.delete])
 
+    // rotas para atualizar o dono/usuario
+    application.get('/salao/:id/dono',[this.validateId, this.findDono])
+    application.put('/salao/:id/dono/:id',[this.validateId, this.replaceDono])
+    application.del('/salao/:id/dono/:id',[this.validateId, this.delete])
+    application.patch('/salao/:id/dono/:id',[this.validateId, this.update])
+    application.post('/salao/:id/dono', this.save)
+    
     // rotas para atualizar o kit
     application.get('/salao/:id/kit',[this.validateId, this.findKit])
     application.put('/salao/:id/kit/:id',[this.validateId, this.replaceKit])

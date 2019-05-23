@@ -41,6 +41,9 @@ const preferidoSchema = new mongoose.Schema({
 });
 // schema principal
 const salaoSchema = new mongoose.Schema({
+    dono: {
+        type: mongoose.Schema.Types.ObjectId
+    },
     idSalao: {
         type: String
     },

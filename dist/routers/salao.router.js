@@ -6,6 +6,31 @@ const salao_model_1 = require("../model/salao.model");
 class SalaoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(salao_model_1.Salao);
+        this.findDono = (req, resp, next) => {
+            salao_model_1.Salao.findById(req.params.id, "+dono").then(salao => {
+                if (!salao) {
+                    throw new restify_errors_1.NotFoundError('Dono não encontrado');
+                }
+                else {
+                    resp.json(salao.dono);
+                    return next();
+                }
+            }).catch(next);
+        };
+        this.replaceDono = (req, resp, next) => {
+            salao_model_1.Salao.findById(req.params.id).then(salao => {
+                if (!salao) {
+                    throw new restify_errors_1.NotFoundError('Dono não encontrado');
+                }
+                else {
+                    salao.kit = req.body;
+                    return salao.save();
+                }
+            }).then(salao => {
+                resp.json(salao.dono);
+                return next();
+            }).catch(next);
+        };
         this.findKit = (req, resp, next) => {
             salao_model_1.Salao.findById(req.params.id, "+kit").then(salao => {
                 if (!salao) {
@@ -32,7 +57,10 @@ class SalaoRouter extends model_router_1.ModelRouter {
             }).catch(next);
         };
         this.insereKit = (req, resp, next) => {
-            let document = new this.model(req.body);
+            salao_model_1.Salao.findById(req.params.id).then(salao => {
+                let document = new this.model(req.body);
+                document.save().then(this.render(resp, next)).catch(next);
+            });
         };
         this.findEnderecoFranquia = (req, resp, next) => {
             salao_model_1.Salao.findById(req.params.id, "+endereco").then(salao => {
@@ -168,6 +196,12 @@ class SalaoRouter extends model_router_1.ModelRouter {
         application.put('/salao/:id', [this.validateId, this.replace]);
         application.patch('/salao/:id', [this.validateId, this.update]);
         application.del('/salao/:id', [this.validateId, this.delete]);
+        // rotas para atualizar o dono/usuario
+        application.get('/salao/:id/dono', [this.validateId, this.findDono]);
+        application.put('/salao/:id/dono/:id', [this.validateId, this.replaceDono]);
+        application.del('/salao/:id/dono/:id', [this.validateId, this.delete]);
+        application.patch('/salao/:id/dono/:id', [this.validateId, this.update]);
+        application.post('/salao/:id/dono', this.save);
         // rotas para atualizar o kit
         application.get('/salao/:id/kit', [this.validateId, this.findKit]);
         application.put('/salao/:id/kit/:id', [this.validateId, this.replaceKit]);
