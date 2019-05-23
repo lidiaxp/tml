@@ -35,7 +35,7 @@ export interface Usuario extends mongoose.Document{
   fotoPerfil: Number[],
   status: Boolean,
   perfil: Number,
-  contatos: String[],
+  contatos: String[],// colocar um array com tipo 
   localizacao: LocalizacaoItem[],
   recomendado1: String[],
   recomendado2: String[],
