@@ -22,7 +22,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
 
 
   validateId = (req,resp,next)=>{
-    if(mongoose.Types.ObjectId.isValid(req.params.id)){
+    if(!mongoose.Types.ObjectId.isValid(req.params.id)){
       next(new NotFoundError('Document not found 2'))
     }else{
      next()
