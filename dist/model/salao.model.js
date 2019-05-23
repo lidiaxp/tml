@@ -63,7 +63,7 @@ const salaoSchema = new mongoose.Schema({
         type: Date
     },
     selecionarHora: {
-        type: Timestamp
+        type: Date
     },
     comentarios: {
         type: String
