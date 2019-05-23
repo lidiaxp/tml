@@ -121,7 +121,6 @@ Usuario.findById(req.params.id).then(fot=>{
     
     // rotas de acesso de contatos 
     application.get('/usuario/:id/contatos', [this.validateId, this.findContatos])
-    application.post('/usuario/:id/contatos', [this.validateId, this.save])
     
     application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos])
    
