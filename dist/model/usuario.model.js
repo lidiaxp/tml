@@ -43,7 +43,8 @@ const usuarioSchema = new mongoose.Schema({
         type: String
     },
     cpf: {
-        type: String
+        type: String,
+        unique: true
     },
     codigo: {
         type: String
@@ -53,6 +54,9 @@ const usuarioSchema = new mongoose.Schema({
     },
     saldoConta: {
         type: Number
+    },
+    fotoPerfil: {
+        type: [Number]
     },
     endereco: {
         type: [enderecoSchema]
@@ -77,6 +81,12 @@ const usuarioSchema = new mongoose.Schema({
     },
     recomendado2: {
         type: [String]
+    },
+    avaliacao: {
+        type: mongoose.Schema.Types.ObjectId
+    },
+    denuncia: {
+        type: mongoose.Schema.Types.ObjectId
     }
 });
 exports.Usuario = mongoose.model('Usuario', usuarioSchema);

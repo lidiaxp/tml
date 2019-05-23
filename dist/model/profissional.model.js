@@ -19,17 +19,10 @@ const profissionalSchema = new mongoose.Schema({
         required: true,
         ref: 'usuario'
     },
-    profissao: {
-        type: [profissaoSchema],
-        required: true
-    },
-    foto_perfil: {
+    comentarios: {
         type: String,
-        required: false
-    },
-    preferido: {
-        type: [preferidoSchema],
-        required: false
+        required: true,
+        select: true
     }
 });
 exports.Profissional = mongoose.model('Profissional', profissionalSchema);

@@ -76,7 +76,7 @@ Usuario.findById(req.params.id).then(ava=>{
   if(!ava){
     throw new NotFoundError('Sem Avaliação')
   }else{
-    ava.fotos = req.body // um array
+    ava.fotoPerfil = req.body // um array
     return ava.save()
   }
 }).then(ava=>{
@@ -90,7 +90,7 @@ findFotos = (req,resp,next)=>{
     if(!fot){
       throw new NotFoundError('Usuario não encontrado')
     }else{
-      resp.json(fot.fotos)
+      resp.json(fot.fotoPerfil)
       return next()
     }
   }).catch(next)
@@ -101,7 +101,7 @@ Usuario.findById(req.params.id).then(fot=>{
   if(!fot){
     throw new NotFoundError('Usuario não encontrado')
   }else{
-    fot.fotos = req.body // um array
+    fot.fotoPerfil = req.body // um array
     return fot.save()
   }
 }).then(fot=>{
