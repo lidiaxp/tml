@@ -28,7 +28,7 @@ export interface SalaoFranquia extends mongoose.Document{
   dono: mongoose.Types.ObjectId | Usuario,
   nomefranquia: String, // Nome da Franquia de Salões como Marca da Empresa
   quantidadeFranquia:Number, // quantidade de saloes para o usuário
-  enderecoFranquias: [{
+  enderecoFranquias: [{ // endereço franquia em object
     nomefranquia:{
       type: String,
     },
@@ -40,17 +40,18 @@ export interface SalaoFranquia extends mongoose.Document{
       type:String
     }
   }]
-  idSalao: String, // codigo do salão ao ser criado
+  idFranquia_Numero: String, // codigo do salão ao ser criado
 
   enderecoSalao: String, // adicionar endereço do salão simples
   redeSocial: String, // aqui para linkar atalhos de instagram,Facebook da rede social do salão para visita 
   fotoSalao:Number[], // aqui será armazenado fotos para o salão
-  fotoBancadas: Number[], // aqui será para fotos das bancadas comentadas com Alexandre
+  
   fotoBanner: Number[], //aqui será para fotos das Banners de faixa da frente comentadas com Alexandre
   bancas: [    // array para armazenamento do tipo do serviço e status disponivel, ocupado.
     {
       tipo: String,
-      status: boolean
+      status: boolean,
+      fotoFachadas    // aqui será para fotos das bancadas comentadas com Alexandre
     }
   ], // quantidade a ser disponivel de Salões
   selecionarDias: Date, // Agendar os dias que o salao irá funcionar dos serviços a serem alocados
