@@ -1,45 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
-// schema 
-const servicoSchema = new mongoose.Schema({
-    tipo: {
-        type: String,
-        required: true,
-        maxlength: 50
-    },
-    descricao: {
-        type: String,
-        required: false,
-        maxlength: 300
-    },
-    cliente: {
-        type: String,
-        required: true,
-        maxlength: 50
-    },
-    status: {
-        type: Number,
-        required: true,
-        enum: 0 // status de a fazer
-    }
-});
 const tarefaSchema = new mongoose.Schema({
-    servico: {
-        type: [servicoSchema],
-        required: false,
+    descricao: {
+        type: String
     },
-    realizador: {
-        type: mongoose.Schema.Types.ObjectId
+    usuario: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     },
     cliente: {
-        type: mongoose.Schema.Types.ObjectId
+        type: String
     },
     data: {
         type: Date,
+        required: true
     },
     status: {
-        type: Number,
+        type: Boolean,
+        enum: false
     }
 });
 exports.Tarefa = mongoose.model('Tarefa', tarefaSchema);

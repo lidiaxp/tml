@@ -1,70 +1,34 @@
 import * as mongoose from 'mongoose';
 import { Usuario } from './usuario.model';
 
-
-
-export interface Servico extends mongoose.Document{
-    tipo: String,
-    descricao: String,
-    cliente: String,
-    status: Number
-}
-
-
 export interface Tarefa extends mongoose.Document{
-    servico: Servico[],
-    realizador: mongoose.Types.ObjectId | Usuario,
-    cliente: mongoose.Types.ObjectId,
+    descricao:String,
+    usuario: mongoose.Types.ObjectId | Usuario,// id, nome e profissão que vai ser populado
+    cliente: String,
     data: Date,
-    status: Number
+    status: boolean
 }
-
-// schema 
-
-const servicoSchema = new mongoose.Schema({
-    tipo:{
-        type: String,
-        required: true,
-        maxlength: 50
-    },
-    descricao:{
-        type: String,
-        required: false,
-        maxlength: 300
-    },
-    cliente:{
-        type: String,
-        required: true,
-        maxlength:50
-    },
-    status:{
-        type: Number,
-        required:true,
-        enum: 0 // status de a fazer
-    }
-
-})
 
 const tarefaSchema = new mongoose.Schema({
-    servico:{
-        type:[servicoSchema],
-        required: false,
-
+    descricao:{
+        type:String
     },
-    realizador:{
-        type:mongoose.Schema.Types.ObjectId
+    usuario:{
+        type:mongoose.Schema.Types.ObjectId,
+        required: true
     },
     cliente:{
-        type:mongoose.Schema.Types.ObjectId
+        type:String
     },
     data:{
         type: Date,
-      
+        required: true
     },
     status:{
-        type:Number,
-
+        type:Boolean,
+        enum: false
     }
 })
+
 
 export const Tarefa = mongoose.model<Tarefa>('Tarefa',tarefaSchema)
