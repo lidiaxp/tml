@@ -4,17 +4,15 @@ const mongoose = require("mongoose");
 const denunciaSchema = new mongoose.Schema({
     denunciador: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'usuario'
+        required: true
     },
     denunciado: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'usuario'
+        required: true
     },
     denuncia: {
         type: String,
         required: true
     }
 });
-exports.Denuncia = mongoose.model('denuncia', denunciaSchema);
+exports.Denuncia = mongoose.model('Denuncia', denunciaSchema);

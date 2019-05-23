@@ -2,12 +2,6 @@ import * as mongoose from 'mongoose'
 
 
 
-
-
-
-
-
-
 export interface KitItem extends mongoose.Document{
   produto: String,
   quantidade: String
