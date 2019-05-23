@@ -48,7 +48,7 @@ export class Server{
           origins: ['*'],
           allowHeaders: ['authorization'],
           exposeHeaders: ['x-custom-header'],
-          credentials: true
+         // credentials: true
           //headers: ['Access-Control-allow-Origin', 'Access-Control-allow-Methods', 'Access-Control-allow-Headers', 'Access-Control-allow-Credentials']
         }
         const cors: corsMiddleware.CorsMiddleware = corsMiddleware(corsOptions)

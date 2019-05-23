@@ -37,8 +37,6 @@ class Server {
                     origins: ['*'],
                     allowHeaders: ['authorization'],
                     exposeHeaders: ['x-custom-header'],
-                    credentials: true
-                    //headers: ['Access-Control-allow-Origin', 'Access-Control-allow-Methods', 'Access-Control-allow-Headers', 'Access-Control-allow-Credentials']
                 };
                 const cors = corsMiddleware(corsOptions);
                 this.application.pre(cors.preflight);
