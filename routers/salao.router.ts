@@ -66,14 +66,14 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
       }).catch(next)
     }
 
-    insereKit = (req, resp, next)=>{
+    /*insereKit = (req, resp, next)=>{
       Salao.create(req.params.id, "+kit").then(salao=>{
         let document = new this.model(req.body)
         document.save().then(this.render(resp,next)).catch(next)  
       })
-    }
+    }*/
 
-    /*
+    
     insereKit = (req, resp, next)=>{
       Salao.findById(req.params.id, "+kit", req.params.id2).then(salao=>{
         if(!salao){
@@ -87,7 +87,7 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
         return next()
       }).catch(next)
     }
-    */ 
+     
 
     findEnderecoFranquia = (req,resp,next)=>{
       Salao.findById(req.params.id, "+endereco").then(salao=>{
