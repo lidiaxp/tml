@@ -219,7 +219,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
         application.post('/salao/:id/dono', this.save);
         // rotas para atualizar o kit
         application.get('/salao/:id/kit', [this.validateId, this.findKit]);
-        application.put('/salao/:id/kit/:id2', [this.validateId, this.replaceKit]);
+        application.put('/salao/:id/kit', [this.validateId, this.replaceKit]);
         application.del('/salao/:id/kit/:id2', [this.validateId, this.delete]);
         application.patch('/salao/:id/kit/:id2', [this.validateId, this.update]);
         application.post('/salao/:id/kit', this.insereKit);
