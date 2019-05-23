@@ -3,11 +3,6 @@ import { Usuario } from './usuario.model';
 
 // Criação do dados de Salão e Franquia por Mairton Leal
 
-<<<<<<< HEAD
-
-=======
-//exportando dados de KitItem
->>>>>>> ffa502b02f84cdbf8c89d91744b3ac7c4eafa6ba
 export interface KitItem extends mongoose.Document{
   produto: String, // produto do kit que será adicionado
   quantidade: String, // quantidade em litros ou materiais 
