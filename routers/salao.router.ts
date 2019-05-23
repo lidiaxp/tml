@@ -35,8 +35,6 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
       }).catch(next)
     }
 
-
-
   applyRoutes(application: restify.Server){
     // CRUD basico
     application.get('/salao',this.findAll)
@@ -48,9 +46,8 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
 
     // rotas para atualizar o kit
     application.get('/salao/:id/kit',[this.validateId, this.findKit])
-    application.put('/salao/:id/kit',[this.validateId, this.findKit])
-    application.post('/salao/:id/kit', this.save)
-
+    application.put('/salao/:id/kit',[this.validateId, this.replaceKit])
+    
 
 
   }

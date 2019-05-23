@@ -42,8 +42,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
         application.del('/salao/:id', [this.validateId, this.delete]);
         // rotas para atualizar o kit
         application.get('/salao/:id/kit', [this.validateId, this.findKit]);
-        application.put('/salao/:id/kit', [this.validateId, this.findKit]);
-        application.post('/salao/:id/kit', this.save);
+        application.put('/salao/:id/kit', [this.validateId, this.replaceKit]);
     }
 }
 exports.salaoRouter = new SalaoRouter();
