@@ -33,7 +33,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
             }).catch(next);
         };
         this.findKit = (req, resp, next) => {
-            salao_model_1.Salao.findById(req.params.id, "+kit").then(salao => {
+            salao_model_1.Salao.findById(req.params.id, "/kit").then(salao => {
                 if (!salao) {
                     throw new restify_errors_1.NotFoundError('Kit não encontrado');
                 }
@@ -44,7 +44,7 @@ class SalaoRouter extends model_router_1.ModelRouter {
             }).catch(next);
         };
         this.replaceKit = (req, resp, next) => {
-            salao_model_1.Salao.findById(req.params.id, "+kit", req.params.id2).then(salao => {
+            salao_model_1.Salao.findById(req.params.id).then(salao => {
                 if (!salao) {
                     throw new restify_errors_1.NotFoundError('Kit não encontrado');
                 }
