@@ -106,7 +106,6 @@ class UsuarioRouter extends model_router_1.ModelRouter {
         application.del('/usuario/:id', [this.validateId, this.delete]);
         // rotas de acesso de contatos 
         application.get('/usuario/:id/contatos', [this.validateId, this.findContatos]);
-        application.post('/usuario/:id/contatos', [this.validateId, this.save]);
         application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos]);
         // rotas de acesso ao endereço
         application.get('/usuario/:id/endereco', [this.validateId, this.findById]);
