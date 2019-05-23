@@ -2,9 +2,11 @@ import * as mongoose from 'mongoose'
 import * as restify from 'restify'
 import{NotFoundError} from 'restify-errors'
 import{ModelRouter} from '../common/model-router'
-import{Salao} from '../model/salao.model'
+import{Salao, SalaoFranquia} from '../model/salao.model'
 
-class SalaoRouter extends ModelRouter<Salao>{
+// Salao é do arquivo model, Salão franquia é do Interface
+
+class SalaoRouter extends ModelRouter<SalaoFranquia>{
   constructor(){
     super(Salao)
   }
