@@ -46,6 +46,9 @@ const usuarioSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
+    foto: {
+        type: [Number]
+    },
     codigo: {
         type: String
     },

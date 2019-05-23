@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const restify_errors_1 = require("restify-errors");
 const model_router_1 = require("../common/model-router");
 const salao_model_1 = require("../model/salao.model");
+// Salao é do arquivo model, Salão franquia é do Interface
 class SalaoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(salao_model_1.Salao);
