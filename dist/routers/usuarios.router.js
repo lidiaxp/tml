@@ -49,7 +49,6 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                 return next();
             }).catch(next);
         };
-        // rota de encontrar fotos já adicionadas
         this.findFotos = (req, resp, next) => {
             usuario_model_1.Usuario.findById(req.params.id, "+fotos").then(fot => {
                 if (!fot) {

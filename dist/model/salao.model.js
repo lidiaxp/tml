@@ -31,10 +31,6 @@ const kitSchema = new mongoose.Schema({
     quantidade: {
         type: String,
         required: true
-    },
-    qualidade: {
-        type: String,
-        required: false
     }
 });
 const preferidoSchema = new mongoose.Schema({
@@ -45,6 +41,9 @@ const preferidoSchema = new mongoose.Schema({
 });
 // schema principal
 const salaoSchema = new mongoose.Schema({
+    dono: {
+        type: mongoose.Schema.Types.ObjectId
+    },
     idSalao: {
         type: String
     },
@@ -72,13 +71,13 @@ const salaoSchema = new mongoose.Schema({
         type: Boolean
     },
     fotoSalao: {
-        type: String
+        type: Number
     },
     fotoBanner: {
-        type: String
+        type: Number
     },
     fotoBancadas: {
-        type: String
+        type: Number
     },
     historicoSalao: {
         type: String,
