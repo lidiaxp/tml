@@ -28,7 +28,7 @@ export class Server{
 
         this.application = restify.createServer(options)
 
-        function corsHandler(req, res, next) {
+        /*function corsHandler(req, res, next) {
           res.setHeader('Access-Control-Allow-Origin', '*');
           res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization');
           res.setHeader('Access-Control-Allow-Methods', '*');
@@ -41,14 +41,19 @@ export class Server{
           res.send(200);
           return next();
         }
+
+        this.application.use(restify.CORS({
+          credentials: true,                 // defaults to false
+          methods: ['GET','PUT','DELETE','POST','OPTIONS']
+        }));
           
-        this.application.opts('/\.*/', corsHandler, optionsRoute);
+        this.application.opts('/\.*/', corsHandler, optionsRoute);*/
 
         const corsOptions: corsMiddleware.Options = {
           origins: ['*'],
           allowHeaders: ['authorization'],
-          exposeHeaders: ['x-custom-header'],
-         // credentials: true
+          exposeHeaders: ['x-custom-header']
+          //credentials: true
           //headers: ['Access-Control-allow-Origin', 'Access-Control-allow-Methods', 'Access-Control-allow-Headers', 'Access-Control-allow-Credentials']
         }
         const cors: corsMiddleware.CorsMiddleware = corsMiddleware(corsOptions)
