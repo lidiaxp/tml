@@ -31,10 +31,6 @@ const kitSchema = new mongoose.Schema({
     quantidade: {
         type: String,
         required: true
-    },
-    qualidade: {
-        type: String,
-        required: false
     }
 });
 const preferidoSchema = new mongoose.Schema({

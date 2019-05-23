@@ -7,7 +7,6 @@ import { Usuario } from './usuario.model';
 export interface KitItem extends mongoose.Document{
   produto: String, // produto do kit que será adicionado
   quantidade: String, // quantidade em litros ou materiais 
-  qualidade: String  // estado do serviço do material se está em Bom Estado, Regular etc.
 }
   
 // Criando dados Cartao Salao e Franquia
@@ -105,10 +104,6 @@ const kitSchema = new mongoose.Schema({
   quantidade:{
     type: String,
     required: true
-  },
-  qualidade:{
-    type:String,
-    required: false 
   }
 })
 const preferidoSchema = new mongoose.Schema({
