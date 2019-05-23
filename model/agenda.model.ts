@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Tarefa } from './tarefa.model';
 import { Profissional } from './profissional.model';
-import { Salao } from './salao.model';
+import { Salao, SalaoFranquia } from './salao.model';
 
 export interface Tarefas extends mongoose.Document{
     tarefa:mongoose.Types.ObjectId | Tarefa
@@ -10,7 +10,7 @@ export interface Tarefas extends mongoose.Document{
 export interface Agenda extends mongoose.Document{
     tarefas: Tarefas[],
     profissional:mongoose.Types.ObjectId | Profissional,
-    salao: mongoose.Types.ObjectId | Salao
+    salao: mongoose.Types.ObjectId | SalaoFranquia
 
 }
  // Schema 

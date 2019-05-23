@@ -98,12 +98,12 @@ class UsuarioRouter extends model_router_1.ModelRouter {
     }*/
     applyRoutes(application) {
         //  rotas de cadastro do usuário
-        application.get('/usuario', this.findAll);
-        application.get('/usuario/:id', [this.validateId, this.findById]);
-        application.post('/usuario', this.save);
-        application.put('/usuario/:id', [this.validateId, this.replace]);
-        application.patch('/usuario/:id', [this.validateId, this.update]);
-        application.del('/usuario/:id', [this.validateId, this.delete]);
+        application.get('/usuarios', this.findAll);
+        application.get('/usuarios/:id', [this.validateId, this.findById]);
+        application.post('/usuarios', this.save);
+        application.put('/usuarios/:id', [this.validateId, this.replace]);
+        application.patch('/usuarios/:id', [this.validateId, this.update]);
+        application.del('/usuarios/:id', [this.validateId, this.delete]);
         // rotas de acesso de contatos 
         application.get('/usuario/:id/contatos', [this.validateId, this.findContatos]);
         application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos]);
