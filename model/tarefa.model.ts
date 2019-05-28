@@ -29,7 +29,7 @@ const tarefaSchema = new mongoose.Schema({
     status:{
         type:Boolean,
         enum: false
-    }
+    },
 })
 
 

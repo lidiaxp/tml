@@ -11,12 +11,15 @@ const tarefaSchema = new mongoose.Schema({
     cliente: {
         type: String
     },
+    observacao: {
+        type: String
+    },
     data: {
         type: Date,
     },
     status: {
         type: Boolean,
         enum: false
-    }
+    },
 });
 exports.Tarefa = mongoose.model('Tarefa', tarefaSchema);
