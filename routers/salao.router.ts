@@ -48,7 +48,7 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
     }
 
     replaceKit = (req,resp,next)=>{
-      Salao.findById(req.params.id, "+kit", req.params.id2).then(salao=>{
+      Salao.findByIdAndUpdate(req.params.id, "+kit", req.params.id2).then(salao=>{
         if(!salao){
           throw new NotFoundError('Kit não encontrado')
         }else{

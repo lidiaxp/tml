@@ -18,6 +18,12 @@ export interface EnderecoItem extends mongoose.Document{
 }
 
 export interface LocalizacaoItem extends mongoose.Document{
+  email: String[],
+  telefone: String[],
+  redeSocial: String[]
+}
+
+export interface ContatoItem extends mongoose.Document{
   latitude: String,
   longitude: String
 }
@@ -35,7 +41,7 @@ export interface Usuario extends mongoose.Document{
   fotoPerfil: String,
   status: Boolean,
   perfil: Number,
-  contatos: String[],// colocar um array com tipo 
+  contatos: ContatoItem[],// colocar um array com tipo 
   localizacao: LocalizacaoItem[],
   recomendado1: String[],
   recomendado2: String[],
@@ -73,6 +79,18 @@ const localizacaoSchema = new mongoose.Schema({
   },
   longitude:{
     type:Number
+  }
+})
+
+const contatoSchema = new mongoose.Schema({
+  email:{
+    type:[String]
+  },
+  telefone:{
+    type:[String]
+  },
+  redeSocial:{
+    type: [String]
   }
 })
 
@@ -118,7 +136,7 @@ const usuarioSchema = new mongoose.Schema({
     type: Number
   },
   contatos:{
-    type: [String]
+    type: [contatoSchema]
   },
   localizacao:{
     type: [localizacaoSchema]

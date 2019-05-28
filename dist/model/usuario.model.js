@@ -32,6 +32,17 @@ const localizacaoSchema = new mongoose.Schema({
         type: Number
     }
 });
+const contatoSchema = new mongoose.Schema({
+    email: {
+        type: [String]
+    },
+    telefone: {
+        type: [String]
+    },
+    redeSocial: {
+        type: [String]
+    }
+});
 const usuarioSchema = new mongoose.Schema({
     nome: {
         type: String
@@ -74,7 +85,7 @@ const usuarioSchema = new mongoose.Schema({
         type: Number
     },
     contatos: {
-        type: [String]
+        type: [contatoSchema]
     },
     localizacao: {
         type: [localizacaoSchema]

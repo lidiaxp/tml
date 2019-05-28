@@ -26,12 +26,14 @@ const preferidoSchema = new mongoose.Schema({
     required: false
   }
 })
+
 const profissaoSchema = new mongoose.Schema({
   servico:{
     type:String,
     required:true
   }
 })
+
 const profissionalSchema = new mongoose.Schema({
   usuario:{
     type:mongoose.Schema.Types.ObjectId,

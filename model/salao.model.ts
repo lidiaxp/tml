@@ -21,62 +21,91 @@ export interface KitItem extends mongoose.Document{
    preferidos: mongoose.Types.ObjectId | Usuario
  }
 
+ export interface EnderecoItem extends mongoose.Document{
+  rua: String,
+  numero: Number,
+  cep: String,
+  bairro: String,
+  complemento: String,
+  cidade: String,
+  estado: String
+}
 
+export interface RedeSocialItem extends mongoose.Document{
+  tipo: String, //ex: facebook
+  descricao: String   //ex: url da rede, numero, dane se
+}
+
+export interface BancasItem extends mongoose.Document{
+  tipo: String, //ex: facebook
+  status: Boolean,   //ex: url da rede, numero, dane se
+  fotoFachada: String
+}
+
+export interface DiasItem extends mongoose.Document{
+  nomeSemana: String, //ex: facebook
+  horaInicio: String,  //ex: url da rede, numero, dane se
+  inicioIntervalo: String,
+  fimIntervalo: String,
+  horarioFim: String
+}
 
 // Criando o Salão simples
 export interface SalaoFranquia extends mongoose.Document{
   dono: mongoose.Types.ObjectId | Usuario,
+  gerente: mongoose.Types.ObjectId | Usuario,
   nomefranquia: String, // Nome da Franquia de Salões como Marca da Empresa
-  quantidadeFranquia:Number, // quantidade de saloes para o usuário
-  enderecoFranquias: [{ // endereço franquia em object
-    nomefranquia:{
-      type: String,
-    },
-    quantidadeFranquia:{
-      type:Number,
-      minlength:1
-    },
-    enderecoFranquias:{
-      type:String
-    }
-  }]
-  idFranquia_Numero: String, // codigo do salão ao ser criado
-
-  enderecoSalao: String, // adicionar endereço do salão simples
-  redeSocial: String, // aqui para linkar atalhos de instagram,Facebook da rede social do salão para visita 
-<<<<<<< HEAD
-  fotoSalao:Number[], // aqui será armazenado fotos para o salão
-  
-  fotoBanner: Number[], //aqui será para fotos das Banners de faixa da frente comentadas com Alexandre
-=======
-  fotoSalao:String, // aqui será armazenado fotos para o salão
-  fotoBancadas: String[], // aqui será para fotos das bancadas comentadas com Alexandre
-  fotoBanner: String, //aqui será para fotos das Banners de faixa da frente comentadas com Alexandre
->>>>>>> b8e82d4f96d64ed0b7ffd156f4a6ad232f3e3f5c
-  bancas: [    // array para armazenamento do tipo do serviço e status disponivel, ocupado.
-    {
-      tipo: String,
-      status: boolean,
-      fotoFachadas    // aqui será para fotos das bancadas comentadas com Alexandre
-    }
-  ], // quantidade a ser disponivel de Salões
-  selecionarDias: Date, // Agendar os dias que o salao irá funcionar dos serviços a serem alocados
-  selecionarHora: Date, // Selecionar a hora dos dias de funcionamento do Salão
-  horaIntervalo: Date, // Inserindo intervalo em que o salao fica fechado ou pausa para o almoço
+  enderecoFranquias: EnderecoItem,
+  redeSocial: RedeSocialItem, // aqui para linkar atalhos de instagram,Facebook da rede social do salão para visita 
+  fotoFachada:String, // aqui será armazenado fotos para o salão
+  bancas: BancasItem[],
+  dias: DiasItem[],
   comentarios: String, // Comentarios sobre salão como ex: Recentemente construido, Com Materias novos etc.
-
   kit: KitItem[], // descrever materias que atendem ao serviço do salão  
   estacionamento: boolean, // descrever se salão possui/ou não estacionamento para o profissional
   tipo: String, // qual plano esta utilizando: Vip,premium
-  dadosCartao: InfoCartao[], // informar dados do cartao como saldo e nome do cartao
-  historicoSalao: [{
-    registro: String,
-    hora: Date
-  }], // Historico de alugueis do profissional
+  saldoVirtual: Number,
   preferido: ProfPreferido[], // lista de profissionais preferidos
- 
-
 }
+
+const bancasSchema = new mongoose.Schema({
+  tipo:{
+    type: String
+  },
+  status:{
+    type: Boolean,
+  },
+  fotoFachada:{
+    type: String,
+  }
+})
+
+const diasSchema = new mongoose.Schema({
+  nomeSemana:{
+    type: String
+  },
+  horaInicio:{
+    type: String,
+  },
+  inicioIntervalo:{
+    type: String
+  },
+  fimIntervalo:{
+    type: String
+  },
+  horarioFim:{
+    type: String
+  }
+})
+
+const redeSocialSchema = new mongoose.Schema({
+  tipo:{
+    type: String
+  },
+  descricao:{
+    type: String,
+  }
+})
 
 // aplicando os Schemas
 const contaSalaoSchema = new mongoose.Schema({
@@ -98,8 +127,30 @@ const contaSalaoSchema = new mongoose.Schema({
     type: Number,
     maxlength: 3
   }
+})
 
-
+const enderecoSchema = new mongoose.Schema({
+  rua:{
+    type:String
+  },
+  numero:{
+    type:Number
+  },
+  cep:{
+    type:String
+  },
+  bairro:{
+    type:String
+  },
+  complemento:{
+    type:String
+  },
+  cidade:{
+    type:String
+  },
+  estado:{
+    type:String
+  }
 })
 
 // schema de kit de produtos do salão
@@ -125,63 +176,45 @@ const salaoSchema = new mongoose.Schema({
   dono:{
     type: mongoose.Schema.Types.ObjectId
   },
-  idSalao:{
+  gerente:{
+    type: mongoose.Schema.Types.ObjectId
+  },
+  nomefranquia:{
     type: String
-  
+  },
+  enderecoFranquias:{
+    type: enderecoSchema
+  },
+  redeSocial:{
+    type: redeSocialSchema
+  },
+  fotoFachada:{
+    type: String
   },
   bancas:{
-    type: String,
-    status:Boolean
+    type: [bancasSchema]
   },
-
-  precoHora:{
-    type: Number,
-    required: true
-  },
-  tipo:{
-    type:String
-  },
-  selecionarDias:{
-    type:Date
-  },
-  selecionarHora:{
-    type:Date
+  dias:{
+    type: [diasSchema]
   },
   comentarios:{
     type:String
   },
- 
+  kit:{
+    type:[kitSchema]
+  },
   estacionamento:{
     type:Boolean
   },
-  fotoSalao:{
-  type:String
+  tipo:{
+    type:String
   },
-  fotoBanner:{
-  type:[String]
-  },
-  fotoBancadas:{
-  type:String
-  },
-  historicoSalao:{
-    type:String,
-    hora: Date
+  saldoVirtual:{
+    type: Number
   },
   preferido:{
-    type:[preferidoSchema],
-    required: false
-  },
-
-  kit:{
-    type:[kitSchema],
-    tipodeKit: String,
-    quantidade: String,
-    default: [],
-  },
-  dadosCartao:{
-    type:[contaSalaoSchema]
+    type:[preferidoSchema]
   }
-
 })
 
 export const Salao = mongoose.model<SalaoFranquia>('Salao', salaoSchema)
