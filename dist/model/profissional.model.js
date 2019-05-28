@@ -3,26 +3,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const preferidoSchema = new mongoose.Schema({
     saloes: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false
+        type: mongoose.Types.ObjectId
     }
 });
 const profissaoSchema = new mongoose.Schema({
-    servico: {
-        type: String,
-        required: true
+    nome: {
+        type: mongoose.Types.ObjectId
     }
 });
 const profissionalSchema = new mongoose.Schema({
     usuario: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'usuario'
+        type: mongoose.Schema.Types.ObjectId
     },
-    comentarios: {
-        type: String,
-        required: true,
-        select: true
+    profissao: {
+        type: [profissaoSchema]
+    },
+    foto_perfil: {
+        type: String
+    },
+    preferido: {
+        type: [preferidoSchema]
     }
 });
 exports.Profissional = mongoose.model('Profissional', profissionalSchema);

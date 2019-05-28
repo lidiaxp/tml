@@ -1,6 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
+const bancasSchema = new mongoose.Schema({
+    tipo: {
+        type: String
+    },
+    status: {
+        type: Boolean,
+    },
+    fotoFachada: {
+        type: String,
+    }
+});
+const diasSchema = new mongoose.Schema({
+    nomeSemana: {
+        type: String
+    },
+    horaInicio: {
+        type: String,
+    },
+    inicioIntervalo: {
+        type: String
+    },
+    fimIntervalo: {
+        type: String
+    },
+    horarioFim: {
+        type: String
+    }
+});
+const redeSocialSchema = new mongoose.Schema({
+    tipo: {
+        type: String
+    },
+    descricao: {
+        type: String,
+    }
+});
 // aplicando os Schemas
 const contaSalaoSchema = new mongoose.Schema({
     saldoVirtual: {
@@ -20,6 +56,29 @@ const contaSalaoSchema = new mongoose.Schema({
     codCartao: {
         type: Number,
         maxlength: 3
+    }
+});
+const enderecoSchema = new mongoose.Schema({
+    rua: {
+        type: String
+    },
+    numero: {
+        type: Number
+    },
+    cep: {
+        type: String
+    },
+    bairro: {
+        type: String
+    },
+    complemento: {
+        type: String
+    },
+    cidade: {
+        type: String
+    },
+    estado: {
+        type: String
     }
 });
 // schema de kit de produtos do salão
@@ -44,57 +103,44 @@ const salaoSchema = new mongoose.Schema({
     dono: {
         type: mongoose.Schema.Types.ObjectId
     },
-    idSalao: {
+    gerente: {
+        type: mongoose.Schema.Types.ObjectId
+    },
+    nomefranquia: {
+        type: String
+    },
+    enderecoFranquias: {
+        type: enderecoSchema
+    },
+    redeSocial: {
+        type: redeSocialSchema
+    },
+    fotoFachada: {
         type: String
     },
     bancas: {
-        type: String,
-        status: Boolean
+        type: [bancasSchema]
     },
-    precoHora: {
-        type: Number,
-        required: true
-    },
-    tipo: {
-        type: String
-    },
-    selecionarDias: {
-        type: Date
-    },
-    selecionarHora: {
-        type: Date
+    dias: {
+        type: [diasSchema]
     },
     comentarios: {
         type: String
     },
+    kit: {
+        type: [kitSchema]
+    },
     estacionamento: {
         type: Boolean
     },
-    fotoSalao: {
+    tipo: {
         type: String
     },
-    fotoBanner: {
-        type: [String]
-    },
-    fotoBancadas: {
-        type: String
-    },
-    historicoSalao: {
-        type: String,
-        hora: Date
+    saldoVirtual: {
+        type: Number
     },
     preferido: {
-        type: [preferidoSchema],
-        required: false
-    },
-    kit: {
-        type: [kitSchema],
-        tipodeKit: String,
-        quantidade: String,
-        default: [],
-    },
-    dadosCartao: {
-        type: [contaSalaoSchema]
+        type: [preferidoSchema]
     }
 });
 exports.Salao = mongoose.model('Salao', salaoSchema);

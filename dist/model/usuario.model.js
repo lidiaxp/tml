@@ -97,10 +97,10 @@ const usuarioSchema = new mongoose.Schema({
         type: [String]
     },
     avaliacao: {
-        type: mongoose.Schema.Types.ObjectId
+        type: [mongoose.Schema.Types.ObjectId]
     },
     denuncia: {
-        type: mongoose.Schema.Types.ObjectId
+        type: [mongoose.Schema.Types.ObjectId]
     }
 });
 exports.Usuario = mongoose.model('Usuario', usuarioSchema);

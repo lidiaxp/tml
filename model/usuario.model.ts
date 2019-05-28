@@ -45,8 +45,8 @@ export interface Usuario extends mongoose.Document{
   localizacao: LocalizacaoItem[],
   recomendado1: String[],
   recomendado2: String[],
-  avaliacao: mongoose.Types.ObjectId | Avaliacao,
-  denuncia: mongoose.Types.ObjectId | Denuncia
+  avaliacao: mongoose.Types.ObjectId[] | Avaliacao,
+  denuncia: mongoose.Types.ObjectId[] | Denuncia
 }
 
 const enderecoSchema = new mongoose.Schema({
@@ -148,10 +148,10 @@ const usuarioSchema = new mongoose.Schema({
     type: [String]
   }, 
   avaliacao:{
-    type:mongoose.Schema.Types.ObjectId
+    type:[mongoose.Schema.Types.ObjectId]
   }, 
   denuncia:{
-    type:mongoose.Schema.Types.ObjectId
+    type:[mongoose.Schema.Types.ObjectId]
   }
 })
 

@@ -118,38 +118,6 @@ Usuario.findById(req.params.id).then(fot=>{
     application.put('/usuarios/:id',[this.validateId, this.replace])
     application.patch('/usuarios/:id',[this.validateId, this.update])
     application.del('/usuarios/:id',[this.validateId, this.delete])
-    
-    // rotas de acesso de contatos 
-    application.get('/usuario/:id/contatos', [this.validateId, this.findContatos])
-  
-
-    application.put('/usuario/:id/contatos', [this.validateId, this.replaceContatos])
-   
-    // rotas de acesso ao endereço
-    application.get('/usuario/:id/endereco', [this.validateId, this.findById])
-    application.put('/usuario/:id/endereco', [this.validateId, this.replaceEndereco])
-
-
-   
-    //rotas de avaliaçao
-    
-
-    // rotas de acesso denuncia
-
-
-    //rotas de acesso a Tarefas 
-
-
-    // rotas de model de portifolios
-
-
-
-
-
-
-   
-
-
   }
 }
 
