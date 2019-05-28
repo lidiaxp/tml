@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const server_1 = require("./server/server");
 const avaliacao_router_1 = require("./routers/avaliacao.router");
 const denuncia_router_1 = require("./routers/denuncia.router");
+const especialidade_router_1 = require("./routers/especialidade.router");
 const profissao_router_1 = require("./routers/profissao.router");
 const agenda_router_1 = require("./routers/agenda.router");
 const tarefa_router_1 = require("./routers/tarefa.router");
@@ -14,6 +15,7 @@ const server = new server_1.Server();
 server.bootstrap([usuarios_router_1.usuarioRouter,
     profissional_router_1.profissionalRouter,
     salao_router_1.salaoRouter,
+    especialidade_router_1.especialidadeRouter,
     avaliacao_router_1.avaliacaoRouter,
     denuncia_router_1.denunciaRouter,
     profissao_router_1.profissaoRouter,
