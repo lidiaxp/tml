@@ -5,6 +5,7 @@ export interface Tarefa extends mongoose.Document{
     descricao:String,
     usuario: mongoose.Types.ObjectId | Usuario,// id, nome e profissão que vai ser populado
     cliente: String,
+    observacao: String,
     data: Date,
     status: boolean
 }
@@ -18,6 +19,9 @@ const tarefaSchema = new mongoose.Schema({
     },
     cliente:{
         type:String
+    },
+    observacao:{ // tarefa detalhada
+        type: String
     },
     data:{
         type: Date,
