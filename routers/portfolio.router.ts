@@ -4,7 +4,7 @@ import * as restify from 'restify';
 import { Portfolio } from '../model/portfolio.model';
 import{NotFoundError} from 'restify-errors';
 
-class ProfissaoRouter extends ModelRouter<Portfolio>{
+class PortifolioRouter extends ModelRouter<Portfolio>{
     constructor(){
         super(Portfolio)
       }
@@ -18,4 +18,4 @@ class ProfissaoRouter extends ModelRouter<Portfolio>{
     }
 }
 
-export const profissaoRouter = new ProfissaoRouter()
+export const portifolioRouter = new PortifolioRouter()
