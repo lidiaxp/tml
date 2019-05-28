@@ -10,7 +10,6 @@ import{profissionalRouter} from './routers/profissional.router'
 import{salaoRouter} from './routers/salao.router'
 import{portifolioRouter} from './routers/portfolio.router'
 
-
 const server = new Server()
 
 server.bootstrap(

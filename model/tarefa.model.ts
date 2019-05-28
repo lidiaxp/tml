@@ -20,8 +20,7 @@ const tarefaSchema = new mongoose.Schema({
         type:String
     },
     data:{
-        type: Date,
-        required: true
+        type: Date
     },
     status:{
         type:Boolean,
