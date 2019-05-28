@@ -17,6 +17,7 @@ server.bootstrap(
   [usuarioRouter,
    profissionalRouter,
    salaoRouter,
+   especialidadeRouter,
    avaliacaoRouter,
    denunciaRouter,
    profissaoRouter,
