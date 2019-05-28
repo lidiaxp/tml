@@ -14,8 +14,7 @@ const tarefaSchema = new mongoose.Schema({
         type:String
     },
     usuario:{
-        type:mongoose.Schema.Types.ObjectId,
-        required: true
+        type:mongoose.Schema.Types.ObjectId
     },
     cliente:{
         type:String
