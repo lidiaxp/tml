@@ -33,14 +33,6 @@ class ModelRouter extends router_1.Router {
             let document = new this.model(req.body);
             document.save().then(this.render(resp, next)).catch(next);
         };
-        // metodo Post teste
-        this.saveId = (req, resp, next) => {
-            this.model.findOne({ _id: req.params.id });
-            this.prepareOne(this.model.findOne())
-                .then(this.render(resp, next)).catch(next);
-            //let document = new this.model(req.body)
-            //document.save().then(this.render(resp,next)).catch(next)
-        };
         // metodo Pacht
         this.replace = (req, resp, next) => {
             const options = { runValidators: true, overwrite: true };
