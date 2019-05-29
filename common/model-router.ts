@@ -39,7 +39,7 @@ this.model.find()
   // metodo get por Id
   findById = (req,resp,next)=>{
     this.model.findOne({ _id: req.params.id })
-    this.prepareOne(this.model.findOne())
+    this.prepareOne(this.model.findOne({ _id: req.params.id }))
     .then(this.render(resp,next)).catch(next)
   }
 
