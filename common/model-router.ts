@@ -34,7 +34,7 @@ this.model.find()
 
   find = (req,resp,next)=>{
     var search = 'qwert';
-    this.model.find({descricao: { $regex: RegExp(/w/, i)}}) 
+    this.model.find({descricao: { $regex: RegExp(/w/, 'i')}}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       }
