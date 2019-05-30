@@ -20,6 +20,13 @@ export interface KitItem extends mongoose.Document{
  export interface ProfPreferido extends mongoose.Document{
    preferidos: mongoose.Types.ObjectId | Usuario
  }
+ export interface ContasItem extends mongoose.Document{
+  saldoVirtual: Number, // quanto tem disponivel para poder transferir
+  debito: Number, // quanto tem que pagar para o app
+  saldoDinheiro: Number, // caso recebe em dinheiro, fica como registro
+  saldoCartao: Number, // caso pague em cartão, fica salvo como registro
+
+}
 
  export interface EnderecoItem extends mongoose.Document{
   rua: String,
@@ -54,6 +61,7 @@ export interface DiasItem extends mongoose.Document{
 export interface SalaoFranquia extends mongoose.Document{
   dono: mongoose.Types.ObjectId | Usuario,
   gerente: mongoose.Types.ObjectId | Usuario,
+  codigoFranquia: String,
   nomefranquia: String, // Nome da Franquia de Salões como Marca da Empresa
   enderecoFranquias: EnderecoItem,
   redeSocial: RedeSocialItem, // aqui para linkar atalhos de instagram,Facebook da rede social do salão para visita 
@@ -62,9 +70,8 @@ export interface SalaoFranquia extends mongoose.Document{
   dias: DiasItem[],
   comentarios: String, // Comentarios sobre salão como ex: Recentemente construido, Com Materias novos etc.
   kit: KitItem[], // descrever materias que atendem ao serviço do salão  
-  estacionamento: boolean, // descrever se salão possui/ou não estacionamento para o profissional
   tipo: String, // qual plano esta utilizando: Vip,premium
-  saldoVirtual: Number,
+  conta:ContasItem,
   preferido: ProfPreferido[], // lista de profissionais preferidos
 }
 

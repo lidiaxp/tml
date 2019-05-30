@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose'
-import {environment} from '../common/environment'
 import{Usuario} from './usuario.model'
 
 export interface Avaliacao extends mongoose.Document{
