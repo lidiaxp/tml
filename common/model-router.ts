@@ -27,7 +27,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
   
   // metodo get
   findAll = (req,resp,next)=>{
-this.model.find() //{descricao:req.query.descricao}
+this.model.find({descricao:req.query.descricao}) 
     .then(this.renderAll(resp,next))
     .catch(next)
   }
