@@ -33,7 +33,6 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    console.log(req.query.descricao);
     var search = req.query.descricao;
     this.model.find({descricao: new RegExp(search)}) 
         .then(this.renderAll(resp,next))
