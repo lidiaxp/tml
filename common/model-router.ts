@@ -33,7 +33,8 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    this.model.find({descricao: { $regex: RegExp(`/qw/`, 'i')}}) 
+    var search = 'qw';
+    this.model.find({descricao: { $regex: /^search/}}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       }
