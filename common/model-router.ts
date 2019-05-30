@@ -39,7 +39,7 @@ this.model.find()
         .then(this.renderAll(resp,next))
         .catch(next)
       
-    resp.send(req.params)
+    resp.send(req.params + "oi")
       }
 
 
