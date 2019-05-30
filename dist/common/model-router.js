@@ -23,7 +23,7 @@ class ModelRouter extends router_1.Router {
                 .catch(next);
         };
         this.find = (req, resp, next) => {
-            this.model.find({ descricao: { $in: req.query.descricao } })
+            this.model.find({ descricao: { $search: req.query.descricao } })
                 .then(this.renderAll(resp, next))
                 .catch(next);
         };
