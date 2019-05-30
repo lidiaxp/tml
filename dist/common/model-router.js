@@ -28,7 +28,6 @@ class ModelRouter extends router_1.Router {
             this.model.find({ descricao: new RegExp(search) })
                 .then(this.renderAll(resp, next))
                 .catch(next);
-            resp.send(req.query.descricao + "oi");
         };
         // metodo get por Id
         this.findById = (req, resp, next) => {

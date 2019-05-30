@@ -38,8 +38,6 @@ this.model.find()
     this.model.find({descricao: new RegExp(search)}) 
         .then(this.renderAll(resp,next))
         .catch(next)
-      
-    resp.send(req.query.descricao + "oi")
       }
 
 
