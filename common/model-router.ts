@@ -33,7 +33,7 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    this.model.find({descricao: { $regex: RegExp(`/` + 'w' + `/`, 'i')}}) 
+    this.model.find({descricao: { $regex: RegExp('/qw/', 'i')}}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       }
