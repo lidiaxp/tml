@@ -33,13 +33,13 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    console.log(req.param.descricao);
-    var search = req.param.descricao;
+    console.log(req.query.descricao);
+    var search = req.query.descricao;
     this.model.find({descricao: new RegExp(search)}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       
-    resp.send(req.param.descricao + "oi")
+    resp.send(req.query.descricao + "oi")
       }
 
 
