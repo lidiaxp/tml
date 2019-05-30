@@ -33,9 +33,7 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    let regex = new RegExp(req.params.descricao,'i');
-
-    this.model.find({descricao: regex}) 
+    this.model.find({$text : { $search : req.params.descricao}}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       }
