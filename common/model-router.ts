@@ -33,7 +33,7 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    this.model.find({descricao: /qw/}) 
+    this.model.find({descricao: /req.params.descricao/}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       }
