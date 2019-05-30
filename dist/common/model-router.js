@@ -24,7 +24,7 @@ class ModelRouter extends router_1.Router {
         };
         this.find = (req, resp, next) => {
             var search = 'qwert';
-            this.model.find({ descricao: new RegExp('/qw/') })
+            this.model.find({ descricao: { $regex: /qw/i } })
                 .then(this.renderAll(resp, next))
                 .catch(next);
         };
