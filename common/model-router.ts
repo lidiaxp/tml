@@ -33,7 +33,7 @@ this.model.find()
   }
 
   find = (req,resp,next)=>{
-    this.model.find({$text : { $search : "qw"}}) 
+    this.model.find({descricao: /qw/}) 
         .then(this.renderAll(resp,next))
         .catch(next)
       }
