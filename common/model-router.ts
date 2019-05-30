@@ -17,10 +17,6 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
     return query
   }
 
-  
- 
-
-
   validateId = (req,resp,next)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id)){
       next(new NotFoundError('Document not found 2'))
@@ -36,9 +32,17 @@ this.model.find()
     .catch(next)
   }
   
+  find = (req, res, next)=>{
+    this.model.find({descricao:req.query.descricao}).then((result) => {
+      res.json(result)
+    }, (err) => {
+      res.status(500).json({error: err})
+    })
+  }
+
   // metodo get por Id
   findById = (req,resp,next)=>{
-    this.model.findOne({ _id: req.params.id })
+    this.model.findOne({ _id: req.params.id})
     this.prepareOne(this.model.findOne({ _id: req.params.id }))
     .then(this.render(resp,next)).catch(next)
   }

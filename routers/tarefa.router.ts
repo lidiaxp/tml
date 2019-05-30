@@ -9,7 +9,8 @@ class TarefaRouter extends ModelRouter<Tarefa>{
         super(Tarefa)
       }
     applyRoutes(application: restify.Server) {
-        application.get('/tarefas',this.findAll)
+        //application.get('/tarefas',this.findAll)
+        application.get('/tarefas/:id', this.find)
         application.get('/tarefas/:id',[this.validateId,this.findById])
         application.post('/tarefas',this.save)
         application.put('/tarefas/:id',[this.validateId, this.replace])
