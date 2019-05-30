@@ -34,11 +34,14 @@ this.model.find()
 
   find = (req,resp,next)=>{
     console.log(req.params);
-    var search = req.params.descricao.toString();
+    var search = req.params.descricao;
     this.model.find({descricao: new RegExp(search)}) 
         .then(this.renderAll(resp,next))
         .catch(next)
+      
+    resp.send(req.params)
       }
+
 
   // metodo get por Id
   findById = (req,resp,next)=>{
