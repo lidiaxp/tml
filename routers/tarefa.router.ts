@@ -8,6 +8,15 @@ class TarefaRouter extends ModelRouter<Tarefa>{
     constructor(){
         super(Tarefa)
       }
+
+      findAll = (req,resp,next)=>{
+        var search = req.query.descricao;
+    this.model.find({descricao: new RegExp(search)}) 
+        .sort({"data": 1})
+        .then(this.renderAll(resp,next))
+        .catch(next)
+      }
+
     applyRoutes(application: restify.Server) {
         application.get('/tarefas',this.findAll)
         application.get('/tarefas/:id',[this.validateId,this.findById])

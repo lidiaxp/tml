@@ -8,6 +8,12 @@ class ProfissionalRouter extends ModelRouter<Profissional> {
     super(Profissional)
   }
 
+  findAll = (req,resp,next)=>{
+    this.model.find() 
+        .then(this.renderAll(resp,next))
+        .catch(next)
+      }
+
   applyRoutes(application: restify.Server){
     application.del('/profissional/:id',this.delete)
     // foi retirado e colocado a exclamacao do metodo validate

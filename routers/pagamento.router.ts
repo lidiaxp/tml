@@ -11,6 +11,12 @@ class PagamentoRouter extends ModelRouter<ContaPagamento> {
         super(ContaPagamento)
     }
 
+    findAll = (req,resp,next)=>{
+        this.model.find() 
+            .then(this.renderAll(resp,next))
+            .catch(next)
+          }
+
     applyRoutes(application: restify.Server) {
      application.get('/pagamento',this.findAll)
     application.get('/pagamento/:id',[this.validateId, this.findById])

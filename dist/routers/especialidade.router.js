@@ -5,6 +5,11 @@ const especialidade_model_1 = require("../model/especialidade.model");
 class EspecialidadeRouter extends model_router_1.ModelRouter {
     constructor() {
         super(especialidade_model_1.Especialidade);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         application.get('/especialidade', this.findAll);

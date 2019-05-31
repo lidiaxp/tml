@@ -9,106 +9,12 @@ class UsuarioRouter extends ModelRouter<Usuario> {
   constructor(){
     super(Usuario)
   }
-   // rota de encontrar contatos 
-  findContatos = (req,resp,next)=>{
-    Usuario.findById(req.params.id, "+contatos").then(cont=>{
-      if(!cont){
-        throw new NotFoundError('Contato não encontrado')
-      }else{
-        resp.json(cont.contatos)
-        return next()
+
+  findAll = (req,resp,next)=>{
+    this.model.find() 
+        .then(this.renderAll(resp,next))
+        .catch(next)
       }
-    }).catch(next)
-  }
-  // rota de atualizar dados de contatos 
-  replaceContatos = (req,resp,next)=>{
-  Usuario.findById(req.params.id).then(rest=>{
-    if(!rest){
-      throw new NotFoundError('Contato não encontrado')
-    }else{
-      rest.contatos = req.body // um array
-      return rest.save()
-    }
-  }).then(rest=>{
-    resp.json(rest.contatos)
-    return next()
-  }).catch(next)
-}
-// rota de adicionar endereços
-
-
-
-// rota de atualizar endereços
-replaceEndereco = (req,resp,next)=>{
-Usuario.findById(req.params.id).then(usu=>{
-  if(!usu){
-    throw new NotFoundError('Endereço não encontrado')
-  }else{
-    usu.endereco = req.body // um array
-    return usu.save()
-  }
-}).then(usu=>{
-  resp.json(usu.endereco)
-  return next()
-}).catch(next)
-}
-
-// rota de encontrar fotos já adicionadas
-findFotos = (req,resp,next)=>{
-  Usuario.findById(req.params.id, "+fotos").then(fot=>{
-    if(!fot){
-      throw new NotFoundError('Usuario não encontrado')
-    }else{
-      resp.json(fot.fotoPerfil)
-      return next()
-    }
-  }).catch(next)
-}
-
-
-// rota de atualizar as fotos 
-replaceFotos = (req,resp,next)=>{
-Usuario.findById(req.params.id).then(fot=>{
-  if(!fot){
-    throw new NotFoundError('Usuario não encontrado')
-  }else{
-    fot.fotoPerfil = req.body // um array
-    return fot.save()
-  }
-}).then(fot=>{
-  resp.json(fot.endereco)
-  return next()
-}).catch(next)
-}
-
-
-
-
-
-// referencia a outro model no caso do Salão e do Profissional
-// a primeira são das collections e por segundo são dos atributos
-// findById = (req,resp,next)=>{
-//   this.model.findById(req.params.id)
-//   .populate('Salao', 'espaco, salas, comentarios, precoHora, kit')
-//   .populate('Profissao', 'servico, tipo, comentario')
-//   .then(this.render(resp,next))
-//   .catch(next)
-// }
-
-
-
-
-
-/*findByPreferido = (req,resp,next)=>{ // problema de versão. Não estou conseguindo usar a rota de procurar primeiro por email
-  if(req.query.preferido){
-    Usuario.findByPreferido(req.query.preferido)
-    .then(this.renderAll(resp, next))
-    .catch(next)
-  }else{
-    next()
-  }
-
-}*/
 
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário

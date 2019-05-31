@@ -8,6 +8,13 @@ class AgendaRouter extends ModelRouter<Agenda>{
     constructor(){
         super(Agenda)
       }
+
+      findAll = (req,resp,next)=>{
+    this.model.find() 
+        .then(this.renderAll(resp,next))
+        .catch(next)
+      }
+
     applyRoutes(application: restify.Server) {
         application.get('/agenda',this.findAll)
         application.get('/agenda/:id',[this.validateId,this.findById])

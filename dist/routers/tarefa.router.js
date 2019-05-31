@@ -5,6 +5,13 @@ const tarefa_model_1 = require("../model/tarefa.model");
 class TarefaRouter extends model_router_1.ModelRouter {
     constructor() {
         super(tarefa_model_1.Tarefa);
+        this.findAll = (req, resp, next) => {
+            var search = req.query.descricao;
+            this.model.find({ descricao: new RegExp(search) })
+                .sort({ "data": 1 })
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         application.get('/tarefas', this.findAll);

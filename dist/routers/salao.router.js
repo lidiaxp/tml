@@ -6,6 +6,11 @@ const salao_model_1 = require("../model/salao.model");
 class SalaoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(salao_model_1.Salao);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         // CRUD basico

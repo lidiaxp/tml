@@ -8,6 +8,13 @@ class AvaliacaoRouter extends ModelRouter<Avaliacao>{
     constructor(){
         super(Avaliacao)
       }
+
+      findAll = (req,resp,next)=>{
+        this.model.find() 
+            .then(this.renderAll(resp,next))
+            .catch(next)
+          }
+
     applyRoutes(application: restify.Server) {
         application.get('/avaliacao',this.findAll)
         application.get('/avaliacao/:id',[this.validateId,this.findById])

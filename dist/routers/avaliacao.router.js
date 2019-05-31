@@ -5,6 +5,11 @@ const avaliacao_model_1 = require("../model/avaliacao.model");
 class AvaliacaoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(avaliacao_model_1.Avaliacao);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         application.get('/avaliacao', this.findAll);

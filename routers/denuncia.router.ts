@@ -8,6 +8,13 @@ class DenunciaRouter extends ModelRouter<Denuncia>{
     constructor(){
         super(Denuncia)
       }
+      
+      findAll = (req,resp,next)=>{
+        this.model.find() 
+            .then(this.renderAll(resp,next))
+            .catch(next)
+          }
+
     applyRoutes(application: restify.Server) {
         application.get('/denuncia',this.findAll)
         application.get('/denuncia/:id',[this.validateId,this.findById])

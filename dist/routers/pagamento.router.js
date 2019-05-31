@@ -5,6 +5,11 @@ const pagamento_model_1 = require("../model/pagamento.model");
 class PagamentoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(pagamento_model_1.ContaPagamento);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         application.get('/pagamento', this.findAll);
