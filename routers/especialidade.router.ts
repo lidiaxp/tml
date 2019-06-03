@@ -8,6 +8,13 @@ class EspecialidadeRouter extends ModelRouter<Especialidade>{
     constructor(){
         super(Especialidade)
       }
+      
+      findAll = (req,resp,next)=>{
+        this.model.find() 
+            .then(this.renderAll(resp,next))
+            .catch(next)
+          }
+
     applyRoutes(application: restify.Server) {
         application.get('/especialidade',this.findAll)
         application.get('/especialidade/:id',[this.validateId,this.findById])

@@ -9,6 +9,7 @@ class AvaliacaoRouter extends ModelRouter<Avaliacao>{
         super(Avaliacao)
       }
 
+<<<<<<< HEAD
       findById = (req,resp,next)=>{
         this.model.findOne({ _id: req.params.id})
         .populate('usuario','nome')
@@ -16,6 +17,13 @@ class AvaliacaoRouter extends ModelRouter<Avaliacao>{
         .then(this.render(resp,next)).catch(next)
       }
 
+=======
+      findAll = (req,resp,next)=>{
+        this.model.find() 
+            .then(this.renderAll(resp,next))
+            .catch(next)
+          }
+>>>>>>> 9a7b264138995fc395519eb89dfbb1944cdabda7
 
     applyRoutes(application: restify.Server) {
         application.get('/avaliacao',this.findAll)

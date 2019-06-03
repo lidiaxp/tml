@@ -11,6 +11,12 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
     super(Salao)
   }
 
+  findAll = (req,resp,next)=>{
+    this.model.find() 
+        .then(this.renderAll(resp,next))
+        .catch(next)
+      }
+
   applyRoutes(application: restify.Server){
     // CRUD basico
     application.get('/salao',this.findAll)

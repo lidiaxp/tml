@@ -5,6 +5,11 @@ const profissional_model_1 = require("../model/profissional.model");
 class ProfissionalRouter extends model_router_1.ModelRouter {
     constructor() {
         super(profissional_model_1.Profissional);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         application.del('/profissional/:id', this.delete);

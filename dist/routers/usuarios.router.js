@@ -7,7 +7,6 @@ const restify_errors_1 = require("restify-errors");
 class UsuarioRouter extends model_router_1.ModelRouter {
     constructor() {
         super(usuario_model_1.Usuario);
-        // rota de encontrar contatos 
         this.findContatos = (req, resp, next) => {
             usuario_model_1.Usuario.findById(req.params.id, "+contatos").then(cont => {
                 if (!cont) {
@@ -104,17 +103,12 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                 next();
             }
         };
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
-    /*findByPreferido = (req,resp,next)=>{ // problema de versão. Não estou conseguindo usar a rota de procurar primeiro por email
-      if(req.query.preferido){
-        Usuario.findByPreferido(req.query.preferido)
-        .then(this.renderAll(resp, next))
-        .catch(next)
-      }else{
-        next()
-      }
-    
-    }*/
     applyRoutes(application) {
         //  rotas de cadastro do usuário
         application.get('/usuarios', this.findAll);

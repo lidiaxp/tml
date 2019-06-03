@@ -12,6 +12,7 @@ class UsuarioRouter extends ModelRouter<Usuario> {
   constructor(){
     super(Usuario)
   }
+<<<<<<< HEAD
    // rota de encontrar contatos 
   findContatos = (req,resp,next)=>{
     Usuario.findById(req.params.id, "+contatos").then(cont=>{
@@ -115,20 +116,14 @@ findByEmail = (req,resp,next)=>{
   }
 }
 
+=======
+>>>>>>> 9a7b264138995fc395519eb89dfbb1944cdabda7
 
-
-
-
-/*findByPreferido = (req,resp,next)=>{ // problema de versão. Não estou conseguindo usar a rota de procurar primeiro por email
-  if(req.query.preferido){
-    Usuario.findByPreferido(req.query.preferido)
-    .then(this.renderAll(resp, next))
-    .catch(next)
-  }else{
-    next()
-  }
-
-}*/
+  findAll = (req,resp,next)=>{
+    this.model.find() 
+        .then(this.renderAll(resp,next))
+        .catch(next)
+      }
 
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário

@@ -8,6 +8,14 @@ class PortifolioRouter extends ModelRouter<Portfolio>{
     constructor(){
         super(Portfolio)
       }
+
+      findAll = (req,resp,next)=>{
+        this.model.find() 
+            .then(this.renderAll(resp,next))
+            .catch(next)
+          }
+
+
     applyRoutes(application: restify.Server) {
         application.get('/portfolio',this.findAll)
         application.get('/portfolio/:id',[this.validateId,this.findById])

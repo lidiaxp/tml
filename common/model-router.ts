@@ -32,19 +32,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
   }
   
   // metodo get
-  findAll = (req,resp,next)=>{
-this.model.find() 
-    .then(this.renderAll(resp,next))
-    .catch(next)
-  }
-
-  find = (req,resp,next)=>{
-    let regex = new RegExp(req.params.descricao,'i');
-
-    this.model.find({descricao: regex}) 
-        .then(this.renderAll(resp,next))
-        .catch(next)
-      }
+  
 
   // metodo get por Id
   findById = (req,resp,next)=>{

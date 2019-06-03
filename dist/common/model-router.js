@@ -17,17 +17,6 @@ class ModelRouter extends router_1.Router {
             }
         };
         // metodo get
-        this.findAll = (req, resp, next) => {
-            this.model.find()
-                .then(this.renderAll(resp, next))
-                .catch(next);
-        };
-        this.find = (req, resp, next) => {
-            let regex = new RegExp(req.params.descricao, 'i');
-            this.model.find({ descricao: regex })
-                .then(this.renderAll(resp, next))
-                .catch(next);
-        };
         // metodo get por Id
         this.findById = (req, resp, next) => {
             this.model.findOne({ _id: req.params.id });

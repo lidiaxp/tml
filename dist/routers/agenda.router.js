@@ -5,6 +5,11 @@ const agenda_model_1 = require("../model/agenda.model");
 class AgendaRouter extends model_router_1.ModelRouter {
     constructor() {
         super(agenda_model_1.Agenda);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         application.get('/agenda', this.findAll);
