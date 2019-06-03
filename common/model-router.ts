@@ -17,6 +17,12 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
     return query
   }
 
+  
+  envelope(document: any): any{ // começando a trabalhar com Hypermidia
+    let resource = Object.assign({_links:{}}, document.toJSON())
+    return resource
+  }
+
   validateId = (req,resp,next)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id)){
       next(new NotFoundError('Document not found 2'))

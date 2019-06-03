@@ -1,8 +1,11 @@
 import * as mongoose from 'mongoose'
 import{ModelRouter} from '../common/model-router'
 import * as restify from 'restify'
+import { Usuario } from '../model/usuario.model';
+import { autenticacao } from '../security/autenticador.handler';
 import{NotFoundError} from 'restify-errors'
-import{Usuario} from '../model/usuario.model'
+
+
 
 class UsuarioRouter extends ModelRouter<Usuario> {
 
@@ -94,6 +97,23 @@ Usuario.findById(req.params.id).then(fot=>{
 //   .then(this.render(resp,next))
 //   .catch(next)
 // }
+findByEmail = (req,resp,next)=>{
+  if(req.query.email){
+    Usuario.find(req.query.email)
+
+      .then(usuario => {
+        if(usuario){
+          return [usuario]
+        }else{
+          []
+        }
+      } )
+      .then(this.renderAll(resp,next))
+    .catch(next)
+  }else{
+    next()
+  }
+}
 
 
 
@@ -118,6 +138,8 @@ Usuario.findById(req.params.id).then(fot=>{
     application.put('/usuarios/:id',[this.validateId, this.replace])
     application.patch('/usuarios/:id',[this.validateId, this.update])
     application.del('/usuarios/:id',[this.validateId, this.delete])
+    
+    application.post('/usuario/autenticacao',autenticacao)
   }
 }
 

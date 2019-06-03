@@ -8,6 +8,10 @@ class TarefaRouter extends ModelRouter<Tarefa>{
     constructor(){
         super(Tarefa)
       }
+
+      
+
+
     applyRoutes(application: restify.Server) {
         application.get('/tarefas',this.findAll)
         application.get('/tarefass',this.find)

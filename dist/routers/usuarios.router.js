@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
-const restify_errors_1 = require("restify-errors");
 const usuario_model_1 = require("../model/usuario.model");
+const autenticador_handler_1 = require("../security/autenticador.handler");
+const restify_errors_1 = require("restify-errors");
 class UsuarioRouter extends model_router_1.ModelRouter {
     constructor() {
         super(usuario_model_1.Usuario);
@@ -76,16 +77,34 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                 return next();
             }).catch(next);
         };
+        // referencia a outro model no caso do Salão e do Profissional
+        // a primeira são das collections e por segundo são dos atributos
+        // findById = (req,resp,next)=>{
+        //   this.model.findById(req.params.id)
+        //   .populate('Salao', 'espaco, salas, comentarios, precoHora, kit')
+        //   .populate('Profissao', 'servico, tipo, comentario')
+        //   .then(this.render(resp,next))
+        //   .catch(next)
+        // }
+        this.findByEmail = (req, resp, next) => {
+            if (req.query.email) {
+                usuario_model_1.Usuario.find(req.query.email)
+                    .then(usuario => {
+                    if (usuario) {
+                        return [usuario];
+                    }
+                    else {
+                        [];
+                    }
+                })
+                    .then(this.renderAll(resp, next))
+                    .catch(next);
+            }
+            else {
+                next();
+            }
+        };
     }
-    // referencia a outro model no caso do Salão e do Profissional
-    // a primeira são das collections e por segundo são dos atributos
-    // findById = (req,resp,next)=>{
-    //   this.model.findById(req.params.id)
-    //   .populate('Salao', 'espaco, salas, comentarios, precoHora, kit')
-    //   .populate('Profissao', 'servico, tipo, comentario')
-    //   .then(this.render(resp,next))
-    //   .catch(next)
-    // }
     /*findByPreferido = (req,resp,next)=>{ // problema de versão. Não estou conseguindo usar a rota de procurar primeiro por email
       if(req.query.preferido){
         Usuario.findByPreferido(req.query.preferido)
@@ -104,6 +123,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
         application.put('/usuarios/:id', [this.validateId, this.replace]);
         application.patch('/usuarios/:id', [this.validateId, this.update]);
         application.del('/usuarios/:id', [this.validateId, this.delete]);
+        application.post('/usuario/autenticacao', autenticador_handler_1.autenticacao);
     }
 }
 exports.usuarioRouter = new UsuarioRouter();

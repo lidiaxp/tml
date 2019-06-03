@@ -8,6 +8,15 @@ class AvaliacaoRouter extends ModelRouter<Avaliacao>{
     constructor(){
         super(Avaliacao)
       }
+
+      findById = (req,resp,next)=>{
+        this.model.findOne({ _id: req.params.id})
+        .populate('usuario','nome')
+        this.prepareOne(this.model.findOne({ _id: req.params.id }))
+        .then(this.render(resp,next)).catch(next)
+      }
+
+
     applyRoutes(application: restify.Server) {
         application.get('/avaliacao',this.findAll)
         application.get('/avaliacao/:id',[this.validateId,this.findById])

@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const environment_1 = require("../common/environment");
 const error_handler_1 = require("./error.handler");
 const corsMiddleware = require("restify-cors-middleware");
+const token_parser_1 = require("../security/token.parser");
 class Server {
     initializeDb() {
         mongoose.Promise = global.Promise;
@@ -52,6 +53,7 @@ class Server {
                 this.application.use(cors.actual);
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
+                this.application.use(token_parser_1.tokenParser); // au declarar aqui, isso vai está disponivel em todo request
                 //rotas
                 for (let router of routers) {
                     router.applyRoutes(this.application);
