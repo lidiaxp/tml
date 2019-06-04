@@ -5,7 +5,7 @@ import { NotAuthorizedError } from 'restify-errors';
 import { userInfo } from 'os';
 import { environment } from '../common/environment';
 
-// feito por yuri pimentels
+// feito por yuri pimentel
 
 
 export const autenticacao: restify.RequestHandler = (req,resp,next)=>{ // tipando a constante

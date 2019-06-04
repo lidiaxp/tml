@@ -3,10 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
 const usuario_model_1 = require("../model/usuario.model");
 const autenticador_handler_1 = require("../security/autenticador.handler");
+const authz_handler_1 = require("../security/authz.handler");
 const restify_errors_1 = require("restify-errors");
 class UsuarioRouter extends model_router_1.ModelRouter {
     constructor() {
         super(usuario_model_1.Usuario);
+        // rota de encontrar contatos 
         this.findContatos = (req, resp, next) => {
             usuario_model_1.Usuario.findById(req.params.id, "+contatos").then(cont => {
                 if (!cont) {
@@ -111,12 +113,13 @@ class UsuarioRouter extends model_router_1.ModelRouter {
     }
     applyRoutes(application) {
         //  rotas de cadastro do usuário
-        application.get('/usuarios', this.findAll);
-        application.get('/usuarios/:id', [this.validateId, this.findById]);
-        application.post('/usuarios', this.save);
-        application.put('/usuarios/:id', [this.validateId, this.replace]);
-        application.patch('/usuarios/:id', [this.validateId, this.update]);
-        application.del('/usuarios/:id', [this.validateId, this.delete]);
+        application.get({ path: '/usuarios', version: '2.0.0' }, [authz_handler_1.authorize('adimin'), this.findByEmail, this.findAll]);
+        application.get({ path: '/usuarios', version: '1.0.0' }, [authz_handler_1.authorize('adimin'), this.findAll]);
+        application.get('/usuarios/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.findById]);
+        application.post('/usuarios', [authz_handler_1.authorize('adimin'), this.save]);
+        application.put('/usuarios/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.replace]);
+        application.patch('/usuarios/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.update]);
+        application.del('/usuarios/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.delete]);
         application.post('/usuario/autenticacao', autenticador_handler_1.autenticacao);
     }
 }

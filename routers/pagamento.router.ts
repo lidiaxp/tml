@@ -3,6 +3,8 @@ import { ModelRouter } from '../common/model-router';
 import{NotFoundError} from 'restify-errors';
 import * as restify from 'restify';
 import { ContaPagamento } from '../model/pagamento.model';
+import { authorize } from '../security/authz.handler';
+
 
 
 class PagamentoRouter extends ModelRouter<ContaPagamento> {
@@ -20,10 +22,10 @@ class PagamentoRouter extends ModelRouter<ContaPagamento> {
     applyRoutes(application: restify.Server) {
      application.get('/pagamento',this.findAll)
     application.get('/pagamento/:id',[this.validateId, this.findById])
-    application.post('/pagamento', this.save)
-    application.put('/pagamento/:id',[this.validateId, this.replace])
-    application.patch('/pagamento/:id',[this.validateId, this.update])
-    application.del('/pagamento/:id',[this.validateId, this.delete])
+    application.post('/pagamento', [authorize('adimin'),this.save])
+    application.put('/pagamento/:id',[authorize('adimin'),this.validateId, this.replace])
+    application.patch('/pagamento/:id',[authorize('adimin'),this.validateId, this.update])
+    application.del('/pagamento/:id',[authorize('adimin'),this.validateId, this.delete])
 
         
     }

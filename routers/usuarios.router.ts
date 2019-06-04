@@ -3,7 +3,9 @@ import{ModelRouter} from '../common/model-router'
 import * as restify from 'restify'
 import { Usuario } from '../model/usuario.model';
 import { autenticacao } from '../security/autenticador.handler';
+import { authorize } from '../security/authz.handler';
 import{NotFoundError} from 'restify-errors'
+
 
 
 
@@ -12,7 +14,6 @@ class UsuarioRouter extends ModelRouter<Usuario> {
   constructor(){
     super(Usuario)
   }
-<<<<<<< HEAD
    // rota de encontrar contatos 
   findContatos = (req,resp,next)=>{
     Usuario.findById(req.params.id, "+contatos").then(cont=>{
@@ -116,8 +117,6 @@ findByEmail = (req,resp,next)=>{
   }
 }
 
-=======
->>>>>>> 9a7b264138995fc395519eb89dfbb1944cdabda7
 
   findAll = (req,resp,next)=>{
     this.model.find() 
@@ -127,12 +126,13 @@ findByEmail = (req,resp,next)=>{
 
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário
-    application.get('/usuarios',this.findAll)
-    application.get('/usuarios/:id',[this.validateId, this.findById])
-    application.post('/usuarios', this.save)
-    application.put('/usuarios/:id',[this.validateId, this.replace])
-    application.patch('/usuarios/:id',[this.validateId, this.update])
-    application.del('/usuarios/:id',[this.validateId, this.delete])
+    application.get({path:'/usuarios', version:'2.0.0'},[authorize('adimin'),this.findByEmail,this.findAll])
+    application.get({path:'/usuarios', version:'1.0.0'},[authorize('adimin'),this.findAll])
+    application.get('/usuarios/:id',[authorize('adimin'),this.validateId, this.findById])
+    application.post('/usuarios',[authorize('adimin'), this.save])
+    application.put('/usuarios/:id',[authorize('adimin'),this.validateId, this.replace])
+    application.patch('/usuarios/:id',[authorize('adimin'),this.validateId, this.update])
+    application.del('/usuarios/:id',[authorize('adimin'),this.validateId, this.delete])
     
     application.post('/usuario/autenticacao',autenticacao)
   }
