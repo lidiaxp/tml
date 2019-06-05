@@ -11,6 +11,6 @@ export interface Portfolio extends mongoose.Document{
     fotos:{
       type: [String]
     }
-  })
+  },{versionKey:false})
 
   export const Portfolio = mongoose.model<Portfolio>('Portfolio', portfolioSchema)

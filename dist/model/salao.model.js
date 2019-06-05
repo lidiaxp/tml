@@ -142,5 +142,5 @@ const salaoSchema = new mongoose.Schema({
     preferido: {
         type: [preferidoSchema]
     }
-});
+}, { versionKey: false });
 exports.Salao = mongoose.model('Salao', salaoSchema);

@@ -55,6 +55,6 @@ const profissionalSchema = new mongoose.Schema({
   portifolio:{
     type: mongoose.Schema.Types.ObjectId
   }
-})
+},{versionKey:false})
 
 export const Profissional = mongoose.model<Profissional>('Profissional', profissionalSchema)

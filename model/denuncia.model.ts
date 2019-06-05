@@ -21,6 +21,6 @@ const denunciaSchema = new mongoose.Schema({
         type:String,
         required:true
     }
-})
+},{versionKey:false})
 
 export const Denuncia = mongoose.model<Denuncia>('Denuncia',denunciaSchema)

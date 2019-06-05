@@ -21,5 +21,5 @@ const tarefaSchema = new mongoose.Schema({
         type: Boolean,
         enum: false
     },
-});
+}, { versionKey: false });
 exports.Tarefa = mongoose.model('Tarefa', tarefaSchema);

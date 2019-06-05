@@ -22,10 +22,10 @@ class TarefaRouter extends ModelRouter<Tarefa>{
     applyRoutes(application: restify.Server) {
         application.get('/tarefas',this.findAll)
         application.get('/tarefas/:id',[this.validateId,this.findById])
-        application.post('/tarefas',[authorize('adimin'),this.save])
-        application.put('/tarefas/:id',[authorize('adimin'),this.validateId, this.replace])
-        application.patch('/tarefas/:id',[authorize('adimin'),this.validateId, this.update])
-        application.del('/tarefas/:id',[authorize('adimin'),this.validateId, this.delete])
+        application.post('/tarefas',[authorize('usuario'),this.save])
+        application.put('/tarefas/:id',[authorize('usuario'),this.validateId, this.replace])
+        application.patch('/tarefas/:id',[authorize('usuario'),this.validateId, this.update])
+        application.del('/tarefas/:id',[authorize('usuario'),this.validateId, this.delete])
     }
 }
 

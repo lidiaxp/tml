@@ -30,5 +30,5 @@ const PagamentoSchema = new mongoose.Schema({
     calculoVirtual: {
         type: Number
     }
-});
+}, { versionKey: false });
 exports.ContaPagamento = mongoose.model("ContaPagamento", PagamentoSchema);

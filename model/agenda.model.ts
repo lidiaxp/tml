@@ -27,7 +27,10 @@ export interface Agenda extends mongoose.Document{
      salao:{
          type:mongoose.Schema.Types.ObjectId,
          required: false
-     }
- })
+     },
+     
 
+ },{versionKey:false})
+
+ 
  export const Agenda = mongoose.model<Agenda>('Agenda',agendaSchema)

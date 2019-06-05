@@ -127,7 +127,6 @@ findByEmail = (req,resp,next)=>{
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário
     application.get({path:'/usuarios', version:'2.0.0'},[authorize('adimin'),this.findByEmail,this.findAll])
-    application.get({path:'/usuarios', version:'1.0.0'},[authorize('adimin'),this.findAll])
     application.get('/usuarios/:id',[authorize('adimin'),this.validateId, this.findById])
     application.post('/usuarios',[authorize('adimin'), this.save])
     application.put('/usuarios/:id',[authorize('adimin'),this.validateId, this.replace])

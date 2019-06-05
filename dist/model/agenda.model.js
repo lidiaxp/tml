@@ -14,6 +14,6 @@ const agendaSchema = new mongoose.Schema({
     salao: {
         type: mongoose.Schema.Types.ObjectId,
         required: false
-    }
-});
+    },
+}, { versionKey: false });
 exports.Agenda = mongoose.model('Agenda', agendaSchema);

@@ -14,5 +14,5 @@ const denunciaSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-});
+}, { versionKey: false });
 exports.Denuncia = mongoose.model('Denuncia', denunciaSchema);

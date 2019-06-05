@@ -222,6 +222,6 @@ const salaoSchema = new mongoose.Schema({
   preferido:{
     type:[preferidoSchema]
   }
-})
+},{versionKey:false})
 
 export const Salao = mongoose.model<SalaoFranquia>('Salao', salaoSchema)

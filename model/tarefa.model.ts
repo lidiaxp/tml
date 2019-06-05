@@ -30,7 +30,7 @@ const tarefaSchema = new mongoose.Schema({
         type:Boolean,
         enum: false
     },
-})
+},{versionKey:false})
 
 
 export const Tarefa = mongoose.model<Tarefa>('Tarefa',tarefaSchema)

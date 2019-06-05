@@ -46,7 +46,7 @@ const PagamentoSchema = new mongoose.Schema({
   calculoVirtual: {
     type: Number
   }
-});
+},{versionKey:false});
 
 export const ContaPagamento = mongoose.model<ContaPagamento>(
   "ContaPagamento",

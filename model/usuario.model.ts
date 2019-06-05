@@ -165,7 +165,7 @@ const usuarioSchema = new mongoose.Schema({
     type: [String],
     required: false
   }
-})
+},{versionKey:false})
 
 usuarioSchema.statics.findByEmail = function(email: String, projection: String){
   return this.findOne({email}, projection)

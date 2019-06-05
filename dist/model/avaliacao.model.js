@@ -14,5 +14,5 @@ const avaliacaoSchema = new mongoose.Schema({
     comentario: {
         type: String
     },
-});
+}, { versionKey: false });
 exports.Avaliacao = mongoose.model('Avaliacao', avaliacaoSchema);

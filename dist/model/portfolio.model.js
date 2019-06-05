@@ -5,5 +5,5 @@ const portfolioSchema = new mongoose.Schema({
     fotos: {
         type: [String]
     }
-});
+}, { versionKey: false });
 exports.Portfolio = mongoose.model('Portfolio', portfolioSchema);
