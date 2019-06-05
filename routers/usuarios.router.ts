@@ -126,12 +126,12 @@ findByEmail = (req,resp,next)=>{
 
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário
-    application.get({path:'/usuarios', version:'2.0.0'},[authorize('adimin'),this.findByEmail,this.findAll])
-    application.get('/usuarios/:id',[authorize('adimin'),this.validateId, this.findById])
-    application.post('/usuarios',[authorize('adimin'), this.save])
-    application.put('/usuarios/:id',[authorize('adimin'),this.validateId, this.replace])
-    application.patch('/usuarios/:id',[authorize('adimin'),this.validateId, this.update])
-    application.del('/usuarios/:id',[authorize('adimin'),this.validateId, this.delete])
+    application.get({path:'/usuarios'},/*[authorize('adimin'),/** */this.findByEmail,this.findAll) // depois coloque o []
+    application.get('/usuarios/:id',/*[authorize('adimin'),/** */this.validateId, this.findById)
+    application.post('/usuarios',/*[authorize('adimin'),/** */ this.save)
+    application.put('/usuarios/:id',/*[authorize('adimin'),/** */this.validateId, this.replace)
+    application.patch('/usuarios/:id',/*[authorize('adimin'),/** */this.validateId, this.update)
+    application.del('/usuarios/:id',/*[authorize('adimin'),/** */this.validateId, this.delete)
     
     application.post('/usuario/autenticacao',autenticacao)
   }
