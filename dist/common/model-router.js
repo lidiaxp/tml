@@ -51,10 +51,7 @@ class ModelRouter extends router_1.Router {
                 if (cmdResult.result.n) {
                     resp.send(204);
                     return next();
-                }
-                else {
-                    throw new restify_errors_1.NotFoundError('Documento não encontrado');
-                }
+                } // else throw Documento não encontrado foi retirado
                 return next();
             }).catch(next);
         };
