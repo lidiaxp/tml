@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
 const portfolio_model_1 = require("../model/portfolio.model");
-const authz_handler_1 = require("../security/authz.handler");
 class PortifolioRouter extends model_router_1.ModelRouter {
     constructor() {
         super(portfolio_model_1.Portfolio);
@@ -15,10 +14,10 @@ class PortifolioRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/portfolio', this.findAll);
         application.get('/portfolio/:id', [this.validateId, this.findById]);
-        application.post('/portfolio', [authz_handler_1.authorize('adimin'), this.save]);
-        application.put('/portfolio/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.replace]);
-        application.patch('/portfolio/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.update]);
-        application.del('/portfolio/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.delete]);
+        application.post('/portfolio', /*[authorize('adimin'),/** */ this.save);
+        application.put('/portfolio/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
+        application.patch('/portfolio/:id', /*[authorize('adimin'),this.validateId,/** */ this.update);
+        application.del('/portfolio/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
     }
 }
 exports.portifolioRouter = new PortifolioRouter();

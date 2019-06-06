@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
 const especialidade_model_1 = require("../model/especialidade.model");
-const authz_handler_1 = require("../security/authz.handler");
 class EspecialidadeRouter extends model_router_1.ModelRouter {
     constructor() {
         super(especialidade_model_1.Especialidade);
@@ -15,10 +14,10 @@ class EspecialidadeRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/especialidade', this.findAll);
         application.get('/especialidade/:id', [this.validateId, this.findById]);
-        application.post('/especialidade', [authz_handler_1.authorize('adimin'), this.save]);
-        application.put('/especialidade/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.replace]);
-        application.patch('/especialidade/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.update]);
-        application.del('/especialidade/:id', [authz_handler_1.authorize('adimin'), this.validateId, this.delete]);
+        application.post('/especialidade', /*[authorize('adimin'),/** */ this.save);
+        application.put('/especialidade/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
+        application.patch('/especialidade/:id', /*[authorize('adimin'),/** */ this.validateId, this.update);
+        application.del('/especialidade/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
     }
 }
 exports.especialidadeRouter = new EspecialidadeRouter();
