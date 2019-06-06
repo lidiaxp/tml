@@ -64,13 +64,16 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
     this.model.findByIdAndUpdate(req.params.id, req.body, options)
     .then(this.render(resp,next)).catch(next)
   }
-
+  
   delete = (req, resp, next)=>{
     this.model.remove({_id:req.params.id}).exec().then((cmdResult: any)=>{
-      if(cmdResult.result){
+      if(cmdResult.result.n){
         resp.send(204)
         return next()
-      } // else throw Documento não encontrado foi retirado
+      } else {
+        resp.send(200)
+        //throw new NotFoundError('Documento não encontrado')
+      }
       return next()
 
     }).catch(next)

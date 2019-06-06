@@ -48,10 +48,14 @@ class ModelRouter extends router_1.Router {
         };
         this.delete = (req, resp, next) => {
             this.model.remove({ _id: req.params.id }).exec().then((cmdResult) => {
-                if (cmdResult.result) {
+                if (cmdResult.result.n) {
                     resp.send(204);
                     return next();
-                } // else throw Documento não encontrado foi retirado
+                }
+                else {
+                    resp.send(200);
+                    //throw new NotFoundError('Documento não encontrado')
+                }
                 return next();
             }).catch(next);
         };
