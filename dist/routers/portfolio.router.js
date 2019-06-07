@@ -14,10 +14,10 @@ class PortifolioRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/portfolio', this.findAll);
         application.get('/portfolio/:id', [this.validateId, this.findById]);
-        application.post('/portfolio', /*[authorize('adimin'),/** */ this.save);
-        application.put('/portfolio/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
-        application.patch('/portfolio/:id', /*[authorize('adimin'),this.validateId,/** */ this.update);
-        application.del('/portfolio/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
+        application.post('/portfolio', this.save);
+        application.put('/portfolio/:id', this.validateId, this.replace);
+        application.patch('/portfolio/:id', this.update);
+        application.del('/portfolio/:id', this.validateId, this.delete);
     }
 }
 exports.portifolioRouter = new PortifolioRouter();

@@ -14,10 +14,10 @@ class AgendaRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/agenda', this.findAll);
         application.get('/agenda/:id', [this.validateId, this.findById]);
-        application.post('/agenda', /*[authorize('adimin'),/** */ this.save);
-        application.put('/agenda/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
-        application.patch('/agenda/:id', /*[authorize('adimin'),/** */ this.validateId, this.update);
-        application.del('/agenda/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
+        application.post('/agenda', this.save);
+        application.put('/agenda/:id', this.validateId, this.replace);
+        application.patch('/agenda/:id', this.validateId, this.update);
+        application.del('/agenda/:id', this.validateId, this.delete);
     }
 }
 exports.agendaRouter = new AgendaRouter();

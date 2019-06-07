@@ -52,7 +52,6 @@ class Server {
                 this.application.use(cors.actual);
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
-                // this.application.use(tokenParser) // au declarar aqui, isso vai está disponivel em todo request
                 //rotas
                 for (let router of routers) {
                     router.applyRoutes(this.application);

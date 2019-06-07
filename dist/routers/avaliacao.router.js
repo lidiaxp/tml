@@ -20,10 +20,10 @@ class AvaliacaoRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/avaliacao', this.findAll);
         application.get('/avaliacao/:id', [this.validateId, this.findById]);
-        application.post('/avaliacao', /*[authorize('adimin'),/** */ this.save);
-        application.put('/avaliacao/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
-        application.patch('/avaliacao/:id', /*[authorize('adimin'),/** */ this.validateId, this.update);
-        application.del('/avaliacao/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
+        application.post('/avaliacao', this.save);
+        application.put('/avaliacao/:id', this.validateId, this.replace);
+        application.patch('/avaliacao/:id', this.validateId, this.update);
+        application.del('/avaliacao/:id', this.validateId, this.delete);
     }
 }
 exports.avaliacaoRouter = new AvaliacaoRouter();

@@ -14,10 +14,10 @@ class DenunciaRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/denuncia', this.findAll);
         application.get('/denuncia/:id', [this.validateId, this.findById]);
-        application.post('/denuncia', /*[authorize('adimin'),/** */ this.save);
-        application.put('/denuncia/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
-        application.patch('/denuncia/:id', /*[authorize('adimin'),/** */ this.validateId, this.update);
-        application.del('/denuncia/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
+        application.post('/denuncia', this.save);
+        application.put('/denuncia/:id', this.validateId, this.replace);
+        application.patch('/denuncia/:id', this.validateId, this.update);
+        application.del('/denuncia/:id', this.validateId, this.delete);
     }
 }
 exports.denunciaRouter = new DenunciaRouter();

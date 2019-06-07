@@ -16,10 +16,10 @@ class SalaoRouter extends model_router_1.ModelRouter {
         // CRUD basico
         application.get('/salao', this.findAll);
         application.get('/salao/:id', [this.validateId, this.findById]);
-        application.post('/salao', /*[authorize('usuario'),/** */ this.save);
-        application.put('/salao/:id', /*[authorize('usuario'),/** */ this.validateId, this.replace);
-        application.patch('/salao/:id', /*[authorize('usuario'),/** */ this.validateId, this.update);
-        application.del('/salao/:id', /*[authorize('usuario'),/** */ this.validateId, this.delete);
+        application.post('/salao', this.save);
+        application.put('/salao/:id', this.validateId, this.replace);
+        application.patch('/salao/:id', this.validateId, this.update);
+        application.del('/salao/:id', this.validateId, this.delete);
     }
 }
 exports.salaoRouter = new SalaoRouter();

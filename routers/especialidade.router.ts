@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 import{ModelRouter} from '../common/model-router';
 import * as restify from 'restify';
 import { Especialidade } from '../model/especialidade.model';
-import { authorize } from '../security/authz.handler';
 import{NotFoundError} from 'restify-errors';
 
 

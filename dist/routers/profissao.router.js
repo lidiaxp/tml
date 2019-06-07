@@ -14,10 +14,10 @@ class ProfissaoRouter extends model_router_1.ModelRouter {
     applyRoutes(application) {
         application.get('/profissao', this.findAll);
         application.get('/profissao/:id', [this.validateId, this.findById]);
-        application.post('/profissao', /*[authorize('adimin'),/** */ this.save);
-        application.put('/profissao/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
-        application.patch('/profissao/:id', /*[authorize('adimin'),/** */ this.validateId, this.update);
-        application.del('/profissao/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
+        application.post('/profissao', this.save);
+        application.put('/profissao/:id', this.validateId, this.replace);
+        application.patch('/profissao/:id', this.validateId, this.update);
+        application.del('/profissao/:id', this.validateId, this.delete);
     }
 }
 exports.profissaoRouter = new ProfissaoRouter();

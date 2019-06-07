@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
 const usuario_model_1 = require("../model/usuario.model");
-const autenticador_handler_1 = require("../security/autenticador.handler");
 const restify_errors_1 = require("restify-errors");
 class UsuarioRouter extends model_router_1.ModelRouter {
     constructor() {
@@ -112,13 +111,12 @@ class UsuarioRouter extends model_router_1.ModelRouter {
     }
     applyRoutes(application) {
         //  rotas de cadastro do usuário
-        application.get({ path: '/usuarios' }, /*[authorize('adimin'),/** */ this.findByEmail, this.findAll); // depois coloque o []
-        application.get('/usuarios/:id', /*[authorize('adimin'),/** */ this.validateId, this.findById);
-        application.post('/usuarios', /*[authorize('adimin'),/** */ this.save);
-        application.put('/usuarios/:id', /*[authorize('adimin'),/** */ this.validateId, this.replace);
-        application.patch('/usuarios/:id', /*[authorize('adimin'),/** */ this.validateId, this.update);
-        application.del('/usuarios/:id', /*[authorize('adimin'),/** */ this.validateId, this.delete);
-        application.post('/usuario/autenticacao', autenticador_handler_1.autenticacao);
+        application.get({ path: '/usuarios' }, this.findByEmail, this.findAll); // depois coloque o []
+        application.get('/usuarios/:id', this.validateId, this.findById);
+        application.post('/usuarios', this.save);
+        application.put('/usuarios/:id', this.validateId, this.replace);
+        application.patch('/usuarios/:id', this.validateId, this.update);
+        application.del('/usuarios/:id', this.validateId, this.delete);
     }
 }
 exports.usuarioRouter = new UsuarioRouter();
