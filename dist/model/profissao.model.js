@@ -5,5 +5,5 @@ const profissaoSchema = new mongoose.Schema({
     nome: {
         type: String
     }
-});
+}, { versionKey: false });
 exports.Profissao = mongoose.model('Profissao', profissaoSchema);

@@ -29,6 +29,7 @@ export interface ContatoItem extends mongoose.Document{
 }
 
 export interface Usuario extends mongoose.Document{
+    
   nome: String,
   email: String,
   senha: String
@@ -47,6 +48,10 @@ export interface Usuario extends mongoose.Document{
   recomendado2: String[],
   avaliacao: mongoose.Types.ObjectId[] | Avaliacao,
   denuncia: mongoose.Types.ObjectId[] | Denuncia
+}
+
+export interface UsuarioModel extends mongoose.Model<Usuario>{
+  findByEmail(email: String, projection?: string): Promise<Usuario>
 }
 
 const enderecoSchema = new mongoose.Schema({
@@ -152,7 +157,16 @@ const usuarioSchema = new mongoose.Schema({
   }, 
   denuncia:{
     type:[mongoose.Schema.Types.ObjectId]
+  },
+  profiles:{
+    type: [String],
+    required: false
   }
-})
+},{versionKey:false})
 
-export const Usuario = mongoose.model<Usuario>('Usuario', usuarioSchema)
+usuarioSchema.statics.findByEmail = function(email: String, projection: String){
+  return this.findOne({email}, projection)
+}
+
+
+export const Usuario = mongoose.model<Usuario, UsuarioModel>('Usuario', usuarioSchema)

@@ -13,6 +13,6 @@ export interface Especialidade extends mongoose.Document{
     categoria:{
         type:mongoose.Schema.Types.ObjectId 
     }
-  })
+  },{versionKey:false})
 
   export const Especialidade = mongoose.model<Especialidade>('Especialidade', especialidadeSchema)

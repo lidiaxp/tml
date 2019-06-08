@@ -6,19 +6,20 @@ const tarefaSchema = new mongoose.Schema({
         type: String
     },
     usuario: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId
     },
     cliente: {
         type: String
     },
+    observacao: {
+        type: String
+    },
     data: {
         type: Date,
-        required: true
     },
     status: {
         type: Boolean,
         enum: false
-    }
-});
+    },
+}, { versionKey: false });
 exports.Tarefa = mongoose.model('Tarefa', tarefaSchema);

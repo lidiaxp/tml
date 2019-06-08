@@ -1,8 +1,11 @@
 import * as mongoose from 'mongoose'
 import{ModelRouter} from '../common/model-router'
 import * as restify from 'restify'
+import { Usuario } from '../model/usuario.model';
 import{NotFoundError} from 'restify-errors'
-import{Usuario} from '../model/usuario.model'
+
+
+
 
 class UsuarioRouter extends ModelRouter<Usuario> {
 
@@ -94,30 +97,41 @@ Usuario.findById(req.params.id).then(fot=>{
 //   .then(this.render(resp,next))
 //   .catch(next)
 // }
+findByEmail = (req,resp,next)=>{
+  if(req.query.email){
+    Usuario.find(req.query.email)
 
-
-
-
-
-/*findByPreferido = (req,resp,next)=>{ // problema de versão. Não estou conseguindo usar a rota de procurar primeiro por email
-  if(req.query.preferido){
-    Usuario.findByPreferido(req.query.preferido)
-    .then(this.renderAll(resp, next))
+      .then(usuario => {
+        if(usuario){
+          return [usuario]
+        }else{
+          []
+        }
+      } )
+      .then(this.renderAll(resp,next))
     .catch(next)
   }else{
     next()
   }
+}
 
-}*/
+
+  findAll = (req,resp,next)=>{
+    this.model.find() 
+        .then(this.renderAll(resp,next))
+        .catch(next)
+      }
 
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário
-    application.get('/usuarios',this.findAll)
-    application.get('/usuarios/:id',[this.validateId, this.findById])
-    application.post('/usuarios', this.save)
-    application.put('/usuarios/:id',[this.validateId, this.replace])
-    application.patch('/usuarios/:id',[this.validateId, this.update])
-    application.del('/usuarios/:id',[this.validateId, this.delete])
+    application.get({path:'/usuarios'},this.findByEmail,this.findAll) // depois coloque o []
+    application.get('/usuarios/:id',this.validateId, this.findById)
+    application.post('/usuarios',this.save)
+    application.put('/usuarios/:id',this.validateId, this.replace)
+    application.patch('/usuarios/:id',this.validateId, this.update)
+    application.del('/usuarios/:id',this.validateId, this.delete)
+    
+    
   }
 }
 

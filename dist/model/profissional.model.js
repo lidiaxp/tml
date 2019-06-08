@@ -23,6 +23,9 @@ const profissionalSchema = new mongoose.Schema({
     },
     preferido: {
         type: [preferidoSchema]
+    },
+    portifolio: {
+        type: mongoose.Schema.Types.ObjectId
     }
-});
+}, { versionKey: false });
 exports.Profissional = mongoose.model('Profissional', profissionalSchema);

@@ -17,29 +17,16 @@ class ModelRouter extends router_1.Router {
             }
         };
         // metodo get
-        this.findAll = (req, resp, next) => {
-            this.model.find()
-                .then(this.renderAll(resp, next))
-                .catch(next);
-        };
         // metodo get por Id
         this.findById = (req, resp, next) => {
             this.model.findOne({ _id: req.params.id });
-            this.prepareOne(this.model.findOne())
+            this.prepareOne(this.model.findOne({ _id: req.params.id }))
                 .then(this.render(resp, next)).catch(next);
         };
         // metodo Post
         this.save = (req, resp, next) => {
             let document = new this.model(req.body);
             document.save().then(this.render(resp, next)).catch(next);
-        };
-        // metodo Post teste
-        this.saveId = (req, resp, next) => {
-            this.model.findOne({ _id: req.params.id });
-            this.prepareOne(this.model.findOne())
-                .then(this.render(resp, next)).catch(next);
-            //let document = new this.model(req.body)
-            //document.save().then(this.render(resp,next)).catch(next)
         };
         // metodo Pacht
         this.replace = (req, resp, next) => {
@@ -61,12 +48,13 @@ class ModelRouter extends router_1.Router {
         };
         this.delete = (req, resp, next) => {
             this.model.remove({ _id: req.params.id }).exec().then((cmdResult) => {
-                if (cmdResult.result.n) {
+                if (cmdResult.n) {
                     resp.send(204);
                     return next();
                 }
                 else {
-                    throw new restify_errors_1.NotFoundError('Documento não encontrado');
+                    resp.send(200);
+                    //throw new NotFoundError('Documento não encontrado')
                 }
                 return next();
             }).catch(next);
@@ -74,6 +62,10 @@ class ModelRouter extends router_1.Router {
     }
     prepareOne(query) {
         return query;
+    }
+    envelope(document) {
+        let resource = Object.assign({ _links: {} }, document.toJSON());
+        return resource;
     }
 }
 exports.ModelRouter = ModelRouter;

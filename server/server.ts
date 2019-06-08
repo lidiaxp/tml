@@ -7,6 +7,7 @@ import * as corsMiddleware from "restify-cors-middleware"
 
 
 
+
 export class Server{
 
   application: restify.Server
@@ -63,6 +64,8 @@ export class Server{
         this.application.use(cors.actual)
         this.application.use(restify.plugins.queryParser())
         this.application.use(restify.plugins.bodyParser())
+       
+        
 
         //rotas
         for(let router of routers){

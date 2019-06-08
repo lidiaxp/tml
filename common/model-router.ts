@@ -18,8 +18,10 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
   }
 
   
- 
-
+  envelope(document: any): any{ // começando a trabalhar com Hypermidia
+    let resource = Object.assign({_links:{}}, document.toJSON())
+    return resource
+  }
 
   validateId = (req,resp,next)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id)){
@@ -30,16 +32,12 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
   }
   
   // metodo get
-  findAll = (req,resp,next)=>{
-this.model.find()
-    .then(this.renderAll(resp,next))
-    .catch(next)
-  }
   
+
   // metodo get por Id
   findById = (req,resp,next)=>{
-    this.model.findOne({ _id: req.params.id })
-    this.prepareOne(this.model.findOne())
+    this.model.findOne({ _id: req.params.id})
+    this.prepareOne(this.model.findOne({ _id: req.params.id }))
     .then(this.render(resp,next)).catch(next)
   }
 
@@ -47,15 +45,6 @@ this.model.find()
   save = (req,resp,next)=>{
     let document = new this.model(req.body)
     document.save().then(this.render(resp,next)).catch(next)
-  }
-
-  // metodo Post teste
-  saveId = (req,resp,next)=>{
-    this.model.findOne({ _id: req.params.id })
-    this.prepareOne(this.model.findOne())
-    .then(this.render(resp,next)).catch(next)
-    //let document = new this.model(req.body)
-    //document.save().then(this.render(resp,next)).catch(next)
   }
 
   // metodo Pacht
@@ -75,13 +64,15 @@ this.model.find()
     this.model.findByIdAndUpdate(req.params.id, req.body, options)
     .then(this.render(resp,next)).catch(next)
   }
+  
   delete = (req, resp, next)=>{
     this.model.remove({_id:req.params.id}).exec().then((cmdResult: any)=>{
-      if(cmdResult.result.n){
+      if(cmdResult.n){
         resp.send(204)
         return next()
       } else {
-        throw new NotFoundError('Documento não encontrado')
+        resp.send(200)
+        //throw new NotFoundError('Documento não encontrado')
       }
       return next()
 

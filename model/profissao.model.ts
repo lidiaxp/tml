@@ -9,6 +9,6 @@ export interface Profissao extends mongoose.Document{
     nome:{
       type:String
     }
-  })
+  },{versionKey:false})
 
   export const Profissao = mongoose.model<Profissao>('Profissao', profissaoSchema)

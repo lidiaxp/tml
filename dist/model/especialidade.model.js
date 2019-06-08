@@ -8,5 +8,5 @@ const especialidadeSchema = new mongoose.Schema({
     categoria: {
         type: mongoose.Schema.Types.ObjectId
     }
-});
+}, { versionKey: false });
 exports.Especialidade = mongoose.model('Especialidade', especialidadeSchema);

@@ -6,15 +6,20 @@ const salao_model_1 = require("../model/salao.model");
 class SalaoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(salao_model_1.Salao);
+        this.findAll = (req, resp, next) => {
+            this.model.find()
+                .then(this.renderAll(resp, next))
+                .catch(next);
+        };
     }
     applyRoutes(application) {
         // CRUD basico
         application.get('/salao', this.findAll);
         application.get('/salao/:id', [this.validateId, this.findById]);
         application.post('/salao', this.save);
-        application.put('/salao/:id', [this.validateId, this.replace]);
-        application.patch('/salao/:id', [this.validateId, this.update]);
-        application.del('/salao/:id', [this.validateId, this.delete]);
+        application.put('/salao/:id', this.validateId, this.replace);
+        application.patch('/salao/:id', this.validateId, this.update);
+        application.del('/salao/:id', this.validateId, this.delete);
     }
 }
 exports.salaoRouter = new SalaoRouter();

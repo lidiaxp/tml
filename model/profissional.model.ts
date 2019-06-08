@@ -4,6 +4,7 @@ import{Salao} from './salao.model';
 import { Timestamp } from 'bson';
 import { SalaoFranquia } from './salao.model';
 import { Profissao } from './profissao.model';
+import{Portfolio} from './portfolio.model'
 
 
 
@@ -20,7 +21,8 @@ export interface Profissional extends mongoose.Document{
   usuario: mongoose.Types.ObjectId | Usuario, // nome, id
   profissao: Profissoes[],
   foto_perfil: String,
-  preferido: Preferido[]
+  preferido: Preferido[],
+  portifolio: mongoose.Types.ObjectId | Portfolio
 }
 
 
@@ -49,7 +51,10 @@ const profissionalSchema = new mongoose.Schema({
   },
   preferido:{
     type: [preferidoSchema]
+  },
+  portifolio:{
+    type: mongoose.Schema.Types.ObjectId
   }
-})
+},{versionKey:false})
 
 export const Profissional = mongoose.model<Profissional>('Profissional', profissionalSchema)

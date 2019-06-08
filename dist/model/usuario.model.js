@@ -101,6 +101,13 @@ const usuarioSchema = new mongoose.Schema({
     },
     denuncia: {
         type: [mongoose.Schema.Types.ObjectId]
+    },
+    profiles: {
+        type: [String],
+        required: false
     }
-});
+}, { versionKey: false });
+usuarioSchema.statics.findByEmail = function (email, projection) {
+    return this.findOne({ email }, projection);
+};
 exports.Usuario = mongoose.model('Usuario', usuarioSchema);
