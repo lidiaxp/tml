@@ -7,7 +7,7 @@ export interface Especialidade extends mongoose.Document{
   }
 
   const especialidadeSchema = new mongoose.Schema({
-    usuario:{
+    nome:{
       type:String
     },
     categoria:{

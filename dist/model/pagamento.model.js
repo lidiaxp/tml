@@ -31,4 +31,4 @@ const PagamentoSchema = new mongoose.Schema({
         type: Number
     }
 });
-exports.Usuario = mongoose.model("ContaPagamento", PagamentoSchema);
+exports.Pagamento = mongoose.model("ContaPagamento", PagamentoSchema);

@@ -48,7 +48,7 @@ const PagamentoSchema = new mongoose.Schema({
   }
 });
 
-export const Usuario = mongoose.model<ContaPagamento>(
+export const Pagamento = mongoose.model<ContaPagamento>(
   "ContaPagamento",
   PagamentoSchema
 );
