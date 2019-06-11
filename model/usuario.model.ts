@@ -47,7 +47,8 @@ export interface Usuario extends mongoose.Document{
   recomendado1: String[],
   recomendado2: String[],
   avaliacao: mongoose.Types.ObjectId[] | Avaliacao,
-  denuncia: mongoose.Types.ObjectId[] | Denuncia
+  denuncia: mongoose.Types.ObjectId[] | Denuncia,
+  matches(senha: string): Boolean
 }
 
 export interface UsuarioModel extends mongoose.Model<Usuario>{
@@ -167,6 +168,19 @@ const usuarioSchema = new mongoose.Schema({
 usuarioSchema.statics.findByEmail = function(email: String, projection: String){
   return this.findOne({email}, projection)
 }
+
+usuarioSchema.methods.matches = function(senha: string): boolean {
+  return bcrypt.compareSync(senha, this.senha)
+}
+
+const hashSenha = (obj, next)=>{
+  bcrypt.hash(obj.senha, environment.security.saltRounds)
+  .then(hash=>{
+    obj.senha = hash
+    next()
+  }).catch
+}
+
 
 
 export const Usuario = mongoose.model<Usuario, UsuarioModel>('Usuario', usuarioSchema)

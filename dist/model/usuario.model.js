@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const environment_1 = require("../common/environment");
 const enderecoSchema = new mongoose.Schema({
     rua: {
         type: String
@@ -109,5 +111,15 @@ const usuarioSchema = new mongoose.Schema({
 }, { versionKey: false });
 usuarioSchema.statics.findByEmail = function (email, projection) {
     return this.findOne({ email }, projection);
+};
+usuarioSchema.methods.matches = function (senha) {
+    return bcrypt.compareSync(senha, this.senha);
+};
+const hashSenha = (obj, next) => {
+    bcrypt.hash(obj.senha, environment_1.environment.security.saltRounds)
+        .then(hash => {
+        obj.senha = hash;
+        next();
+    }).catch;
 };
 exports.Usuario = mongoose.model('Usuario', usuarioSchema);
