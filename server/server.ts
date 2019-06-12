@@ -4,6 +4,9 @@ import {environment} from '../common/environment'
 import {Router} from '../common/router'
 import{handlerError} from './error.handler'
 import * as corsMiddleware from "restify-cors-middleware" 
+import { tokenParser } from '../security/token.parser';
+
+
 
 
 
@@ -64,6 +67,7 @@ export class Server{
         this.application.use(cors.actual)
         this.application.use(restify.plugins.queryParser())
         this.application.use(restify.plugins.bodyParser())
+        this.application.use(tokenParser)
        
         
 
