@@ -1,6 +1,9 @@
+
 import * as restify from 'restify';
+import * as jwt from 'jsonwebtoken';
 import {NotAuthorizedError} from 'restify-errors'
 import { Usuario } from '../model/usuario.model';
+import { environment } from '../common/environment'
 
 
 
@@ -13,6 +16,10 @@ export const authenticate: restify.RequestHandler = (req, resp,next)=>{
         // verificar se existe um usuario com aquele email
         if(usuario && usuario.matches(senha)){ // se o usuario existir 
             // gerar token 
+            const token = jwt.sign({Sub: usuario.email, iss: 'misslaura'}, environment.security.apiSecret)
+            resp.json({nome: usuario.nome, email: usuario.email, acessToken: token})
+            return next(false)
+
         } else{
             return next(new NotAuthorizedError('credenciais invalidas'))
         }

@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const jwt = require("jsonwebtoken");
 const restify_errors_1 = require("restify-errors");
 const usuario_model_1 = require("../model/usuario.model");
+const environment_1 = require("../common/environment");
 // tipando a constante.
 // para ter autenticação, tem que ter duas resposta que devem vir do body da resposta
 exports.authenticate = (req, resp, next) => {
@@ -10,6 +12,9 @@ exports.authenticate = (req, resp, next) => {
         // verificar se existe um usuario com aquele email
         if (usuario && usuario.matches(senha)) {
             // gerar token 
+            const token = jwt.sign({ Sub: usuario.email, iss: 'misslaura' }, environment_1.environment.security.apiSecret);
+            resp.json({ nome: usuario.nome, email: usuario.email, acessToken: token });
+            return next(false);
         }
         else {
             return next(new restify_errors_1.NotAuthorizedError('credenciais invalidas'));

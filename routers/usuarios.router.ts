@@ -2,7 +2,9 @@ import * as mongoose from 'mongoose'
 import{ModelRouter} from '../common/model-router'
 import * as restify from 'restify'
 import { Usuario } from '../model/usuario.model';
+import { authenticate } from '../security/auth.handler';
 import{NotFoundError} from 'restify-errors'
+
 
 
 
@@ -130,6 +132,8 @@ findByEmail = (req,resp,next)=>{
     application.put('/usuarios/:id',this.validateId, this.replace)
     application.patch('/usuarios/:id',this.validateId, this.update)
     application.del('/usuarios/:id',this.validateId, this.delete)
+    
+    application.post('/usuarios/authenticate', authenticate)
     
     
   }
