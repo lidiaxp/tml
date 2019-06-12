@@ -115,6 +115,9 @@ usuarioSchema.statics.findByEmail = function (email, projection) {
 usuarioSchema.methods.matches = function (senha) {
     return bcrypt.compareSync(senha, this.senha);
 };
+usuarioSchema.methods.hasAny = function (...profiles) {
+    return profiles.some(profiles => this.profiles.indexOf(profiles) !== -1);
+};
 const hashSenha = (obj, next) => {
     bcrypt.hash(obj.senha, environment_1.environment.security.saltRounds)
         .then(hash => {

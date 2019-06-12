@@ -2,7 +2,9 @@ import * as mongoose from 'mongoose';
 import{ModelRouter} from '../common/model-router';
 import * as restify from 'restify';
 import { Avaliacao } from '../model/avaliacao.model';
+import { authorized } from '../security/authz.handler';
 import{NotFoundError} from 'restify-errors';
+
 
 
 class AvaliacaoRouter extends ModelRouter<Avaliacao>{
@@ -26,12 +28,12 @@ class AvaliacaoRouter extends ModelRouter<Avaliacao>{
 
 
     applyRoutes(application: restify.Server) {
-        application.get('/avaliacao',this.findAll)
-        application.get('/avaliacao/:id',[this.validateId,this.findById])
-        application.post('/avaliacao',this.save)
-        application.put('/avaliacao/:id',this.validateId, this.replace)
-        application.patch('/avaliacao/:id',this.validateId, this.update)
-        application.del('/avaliacao/:id',this.validateId, this.delete)
+        application.get('/avaliacao',[authorized('usuario'),this.findAll])
+        application.get('/avaliacao/:id',[authorized('usuario'),this.validateId,this.findById])
+        application.post('/avaliacao',[authorized('usuario'),this.save])
+        application.put('/avaliacao/:id',[authorized('usuario'),this.validateId, this.replace])
+        application.patch('/avaliacao/:id',[authorized('usuario'),this.validateId, this.update])
+        application.del('/avaliacao/:id',[authorized('usuario'),this.validateId, this.delete])
     }
 }
 

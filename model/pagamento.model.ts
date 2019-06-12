@@ -48,11 +48,7 @@ const PagamentoSchema = new mongoose.Schema({
   }
 },{versionKey:false});
 
-<<<<<<< HEAD
 export const Pagamento = mongoose.model<ContaPagamento>(
-=======
-export const ContaPagamento = mongoose.model<ContaPagamento>(
->>>>>>> a980a3d0a1ae15afaf22a0bf2ced9a9730ad7c89
   "ContaPagamento",
   PagamentoSchema
 );

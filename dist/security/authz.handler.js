@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const restify_errors_1 = require("restify-errors");
-exports.authorize = (...profiles) => {
+// ela vai receber os perfils e retornar um requesthendler
+exports.authorized = (...profiles) => {
     return (req, resp, next) => {
-        if (req.authenticated !== undefined && req.authenticated.hasAny(profiles)) {
+        if (req.authenticated !== undefined && req.authenticated.hasAny(...profiles)) {
             next();
         }
         else {

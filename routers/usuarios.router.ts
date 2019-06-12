@@ -3,7 +3,9 @@ import{ModelRouter} from '../common/model-router'
 import * as restify from 'restify'
 import { Usuario } from '../model/usuario.model';
 import { authenticate } from '../security/auth.handler';
+import { authorized } from '../security/authz.handler';
 import{NotFoundError} from 'restify-errors'
+
 
 
 
@@ -126,12 +128,12 @@ findByEmail = (req,resp,next)=>{
 
   applyRoutes(application: restify.Server){
     //  rotas de cadastro do usuário
-    application.get({path:'/usuarios'},this.findByEmail,this.findAll) // depois coloque o []
-    application.get('/usuarios/:id',this.validateId, this.findById)
-    application.post('/usuarios',this.save)
-    application.put('/usuarios/:id',this.validateId, this.replace)
-    application.patch('/usuarios/:id',this.validateId, this.update)
-    application.del('/usuarios/:id',this.validateId, this.delete)
+    application.get({path:'/usuarios'},[authorized('usuario'),this.findByEmail,this.findAll]) // depois coloque o []
+    application.get('/usuarios/:id',[authorized('usuario'),this.validateId, this.findById])
+    application.post('/usuarios',[authorized('usuario'),this.save])
+    application.put('/usuarios/:id',[authorized('usuario'),this.validateId, this.replace])
+    application.patch('/usuarios/:id',[authorized('usuario'),this.validateId, this.update])
+    application.del('/usuarios/:id',[authorized('usuario'),this.validateId, this.delete])
     
     application.post('/usuarios/authenticate', authenticate)
     

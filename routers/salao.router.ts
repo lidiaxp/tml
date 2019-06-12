@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 import * as restify from 'restify'
-
+import { authorized } from '../security/authz.handler';
 import{NotFoundError} from 'restify-errors'
 import{ModelRouter} from '../common/model-router'
 import{Salao, SalaoFranquia} from '../model/salao.model'
@@ -21,12 +21,12 @@ class SalaoRouter extends ModelRouter<SalaoFranquia>{
 
   applyRoutes(application: restify.Server){
     // CRUD basico
-    application.get('/salao',this.findAll)
-    application.get('/salao/:id',[this.validateId, this.findById])
-    application.post('/salao',this.save)
-    application.put('/salao/:id',this.validateId, this.replace)
-    application.patch('/salao/:id',this.validateId, this.update)
-    application.del('/salao/:id',this.validateId, this.delete)
+    application.get('/salao',[authorized('usuario'),this.findAll])
+    application.get('/salao/:id',[authorized('usuario'),this.validateId, this.findById])
+    application.post('/salao',[authorized('usuario'),this.save])
+    application.put('/salao/:id',[authorized('usuario'),this.validateId, this.replace])
+    application.patch('/salao/:id',[authorized('usuario'),this.validateId, this.update])
+    application.del('/salao/:id',[authorized('usuario'),this.validateId, this.delete])
   }
 
 }

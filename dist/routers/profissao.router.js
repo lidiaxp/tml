@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
 const profissao_model_1 = require("../model/profissao.model");
+const authz_handler_1 = require("../security/authz.handler");
 class ProfissaoRouter extends model_router_1.ModelRouter {
     constructor() {
         super(profissao_model_1.Profissao);
@@ -12,12 +13,12 @@ class ProfissaoRouter extends model_router_1.ModelRouter {
         };
     }
     applyRoutes(application) {
-        application.get('/profissao', this.findAll);
-        application.get('/profissao/:id', [this.validateId, this.findById]);
-        application.post('/profissao', this.save);
-        application.put('/profissao/:id', this.validateId, this.replace);
-        application.patch('/profissao/:id', this.validateId, this.update);
-        application.del('/profissao/:id', this.validateId, this.delete);
+        application.get('/profissao', [authz_handler_1.authorized('usuario'), this.findAll]);
+        application.get('/profissao/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.findById]);
+        application.post('/profissao', [authz_handler_1.authorized('usuario'), this.save]);
+        application.put('/profissao/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.replace]);
+        application.patch('/profissao/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.update]);
+        application.del('/profissao/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.delete]);
     }
 }
 exports.profissaoRouter = new ProfissaoRouter();

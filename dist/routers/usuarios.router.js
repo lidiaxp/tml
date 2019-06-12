@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const model_router_1 = require("../common/model-router");
 const usuario_model_1 = require("../model/usuario.model");
 const auth_handler_1 = require("../security/auth.handler");
+const authz_handler_1 = require("../security/authz.handler");
 const restify_errors_1 = require("restify-errors");
 class UsuarioRouter extends model_router_1.ModelRouter {
     constructor() {
@@ -112,12 +113,12 @@ class UsuarioRouter extends model_router_1.ModelRouter {
     }
     applyRoutes(application) {
         //  rotas de cadastro do usuário
-        application.get({ path: '/usuarios' }, this.findByEmail, this.findAll); // depois coloque o []
-        application.get('/usuarios/:id', this.validateId, this.findById);
-        application.post('/usuarios', this.save);
-        application.put('/usuarios/:id', this.validateId, this.replace);
-        application.patch('/usuarios/:id', this.validateId, this.update);
-        application.del('/usuarios/:id', this.validateId, this.delete);
+        application.get({ path: '/usuarios' }, [authz_handler_1.authorized('usuario'), this.findByEmail, this.findAll]); // depois coloque o []
+        application.get('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.findById]);
+        application.post('/usuarios', [authz_handler_1.authorized('usuario'), this.save]);
+        application.put('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.replace]);
+        application.patch('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.update]);
+        application.del('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.delete]);
         application.post('/usuarios/authenticate', auth_handler_1.authenticate);
     }
 }
