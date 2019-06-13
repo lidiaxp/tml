@@ -114,8 +114,7 @@ const usuarioSchema = new mongoose.Schema({
     type: String
   },
   cpf:{
-    type: String,
-    unique: true
+    type: String
   },
   foto:{
     type:[Number]
