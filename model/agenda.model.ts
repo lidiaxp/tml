@@ -9,6 +9,7 @@ export interface Agenda extends mongoose.Document{
     tarefa: mongoose.Types.ObjectId | Tarefa
     profissional:mongoose.Types.ObjectId | Profissional,
     salao: mongoose.Types.ObjectId | SalaoFranquia
+    meta: String[]
 
 }
  // Schema 
@@ -27,6 +28,9 @@ export interface Agenda extends mongoose.Document{
      salao:{
          type:mongoose.Schema.Types.ObjectId,
          required: false
+     },
+     meta:{
+         type:[String]
      },
      
 

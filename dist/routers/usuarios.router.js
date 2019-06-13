@@ -115,7 +115,7 @@ class UsuarioRouter extends model_router_1.ModelRouter {
         //  rotas de cadastro do usuário
         application.get({ path: '/usuarios' }, [authz_handler_1.authorized('usuario'), this.findByEmail, this.findAll]); // depois coloque o []
         application.get('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.findById]);
-        application.post('/usuarios', [authz_handler_1.authorized('usuario'), this.save]);
+        application.post('/usuarios', this.save);
         application.put('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.replace]);
         application.patch('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.update]);
         application.del('/usuarios/:id', [authz_handler_1.authorized('usuario'), this.validateId, this.delete]);

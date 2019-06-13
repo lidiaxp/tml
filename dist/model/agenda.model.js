@@ -15,5 +15,8 @@ const agendaSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false
     },
+    meta: {
+        type: [String]
+    },
 }, { versionKey: false });
 exports.Agenda = mongoose.model('Agenda', agendaSchema);

@@ -130,7 +130,7 @@ findByEmail = (req,resp,next)=>{
     //  rotas de cadastro do usuário
     application.get({path:'/usuarios'},[authorized('usuario'),this.findByEmail,this.findAll]) // depois coloque o []
     application.get('/usuarios/:id',[authorized('usuario'),this.validateId, this.findById])
-    application.post('/usuarios',[authorized('usuario'),this.save])
+    application.post('/usuarios',this.save)
     application.put('/usuarios/:id',[authorized('usuario'),this.validateId, this.replace])
     application.patch('/usuarios/:id',[authorized('usuario'),this.validateId, this.update])
     application.del('/usuarios/:id',[authorized('usuario'),this.validateId, this.delete])
