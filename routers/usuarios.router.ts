@@ -15,6 +15,9 @@ class UsuarioRouter extends ModelRouter<Usuario> {
 
   constructor(){
     super(Usuario)
+    this.on('beforeRender', document=>{
+      document.senha = undefined
+    })
   }
    // rota de encontrar contatos 
   findContatos = (req,resp,next)=>{

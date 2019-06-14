@@ -110,6 +110,9 @@ class UsuarioRouter extends model_router_1.ModelRouter {
                 .then(this.renderAll(resp, next))
                 .catch(next);
         };
+        this.on('beforeRender', document => {
+            document.senha = undefined;
+        });
     }
     applyRoutes(application) {
         //  rotas de cadastro do usuário

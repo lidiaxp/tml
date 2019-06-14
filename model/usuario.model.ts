@@ -186,7 +186,25 @@ const hashSenha = (obj, next)=>{
     next()
   }).catch
 }
+const saveMiddleware = function (next){
+  const user: Usuario = this
+  if(!user.isModified('senha')){
+    next()
+  }else{
+    hashSenha(user, next)
+  }
+}
+const updateMiddleware = function (next){
+  if(!this.getUpdate().senha){
+    next()
+  }else{
+    hashSenha(this.getUpdate(), next)
+  }
+}
 
+usuarioSchema.pre('save', saveMiddleware)
+usuarioSchema.pre('findOneAndUpdate', updateMiddleware)
+usuarioSchema.pre('update', updateMiddleware)
 
 
 export const Usuario = mongoose.model<Usuario, UsuarioModel>('Usuario', usuarioSchema)

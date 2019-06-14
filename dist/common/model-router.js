@@ -8,6 +8,7 @@ class ModelRouter extends router_1.Router {
     constructor(model) {
         super();
         this.model = model;
+        this.pageSize = 2;
         this.validateId = (req, resp, next) => {
             if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
                 next(new restify_errors_1.NotFoundError('Document not found 2'));
@@ -65,6 +66,24 @@ class ModelRouter extends router_1.Router {
     }
     envelope(document) {
         let resource = Object.assign({ _links: {} }, document.toJSON());
+        return resource;
+    }
+    envelopeAll(documents, options = {}) {
+        const resource = {
+            _links: {
+                self: `${options.url}`
+            },
+            items: documents
+        };
+        if (options.page && options.count && options.pageSize) {
+            if (options.page > 1) {
+                resource._links.previous = `${this.basePath}?_page=${options.page - 1}`;
+            }
+            const remaining = options.count - (options.page * options.pageSize);
+            if (remaining > 0) {
+                resource._links.next = `${this.basePath}?_page=${options.page + 1}`;
+            }
+        }
         return resource;
     }
 }
