@@ -7,7 +7,7 @@ import{NotFoundError} from 'restify-errors'
 export abstract class ModelRouter<D extends mongoose.Document> extends Router {
 
   basePath: string
- pageSize: Number = 2
+ pageSize: Number = 4
 
   constructor(protected model: mongoose.Model<D>){
     super()
@@ -24,24 +24,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
     return resource
   }
 
-  envelopeAll(documents: any[], options: any = {}): any {
-    const resource: any = {
-      _links:{
-        self: `${options.url}`
-      },
-      items: documents
-    }
-    if(options.page && options.count && options.pageSize){
-      if(options.page > 1){
-        resource._links.previous = `${this.basePath}?_page=${options.page-1}`
-      }
-      const remaining = options.count - (options.page * options.pageSize)
-      if(remaining > 0){
-        resource._links.next = `${this.basePath}?_page=${options.page+1}`
-      }
-    }
-    return resource
-  }
+  
 
   validateId = (req,resp,next)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id)){
