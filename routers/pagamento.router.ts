@@ -22,12 +22,12 @@ class PagamentoRouter extends ModelRouter<ContaPagamento> {
           }
 
     applyRoutes(application: restify.Server) {
-     application.get('/pagamento',[authorized('usuario'),this.findAll])
-    application.get('/pagamento/:id',[authorized('usuario'),this.validateId, this.findById])
-    application.post('/pagamento',[authorized('usuario'),this.save])
-    application.put('/pagamento/:id',[authorized('usuario'),this.validateId, this.replace])
-    application.patch('/pagamento/:id',[authorized('usuario'),this.validateId, this.update])
-    application.del('/pagamento/:id',[authorized('usuario'),this.validateId, this.delete])
+     application.get('/pagamento',/** [authorized('usuario'),*/this.findAll)
+    application.get('/pagamento/:id',/** [authorized('usuario'),*/this.validateId, this.findById)
+    application.post('/pagamento',/** [authorized('usuario'),*/this.save)
+    application.put('/pagamento/:id',/** [authorized('usuario'),*/this.validateId, this.replace)
+    application.patch('/pagamento/:id',/** [authorized('usuario'),*/this.validateId, this.update)
+    application.del('/pagamento/:id',/** [authorized('usuario'),*/this.validateId, this.delete)
 
         
     }

@@ -28,12 +28,12 @@ class AvaliacaoRouter extends ModelRouter<Avaliacao>{
 
 
     applyRoutes(application: restify.Server) {
-        application.get('/avaliacao',[authorized('usuario'),this.findAll])
-        application.get('/avaliacao/:id',[authorized('usuario'),this.validateId,this.findById])
-        application.post('/avaliacao',[authorized('usuario'),this.save])
-        application.put('/avaliacao/:id',[authorized('usuario'),this.validateId, this.replace])
-        application.patch('/avaliacao/:id',[authorized('usuario'),this.validateId, this.update])
-        application.del('/avaliacao/:id',[authorized('usuario'),this.validateId, this.delete])
+        application.get('/avaliacao',/** [authorized('usuario'),*/this.findAll)
+        application.get('/avaliacao/:id',/** [authorized('usuario'),*/this.validateId,this.findById)
+        application.post('/avaliacao',/** [authorized('usuario'),*/this.save)
+        application.put('/avaliacao/:id',/** [authorized('usuario'),*/this.validateId, this.replace)
+        application.patch('/avaliacao/:id',/** [authorized('usuario'),*/this.validateId, this.update)
+        application.del('/avaliacao/:id',/** [authorized('usuario'),*/this.validateId, this.delete)
     }
 }
 

@@ -19,12 +19,12 @@ class PortifolioRouter extends ModelRouter<Portfolio>{
 
 
     applyRoutes(application: restify.Server) {
-        application.get('/portfolio',[authorized('usuario'),this.findAll])
-        application.get('/portfolio/:id',[this.validateId,this.findById])
-        application.post('/portfolio',[authorized('usuario'),this.save])
-        application.put('/portfolio/:id',[authorized('usuario'),this.validateId, this.replace])
-        application.patch('/portfolio/:id', [authorized('usuario'),this.update])
-        application.del('/portfolio/:id',[authorized('usuario'),this.validateId, this.delete])
+        application.get('/portfolio',/** [authorized('usuario'),*/this.findAll)
+        application.get('/portfolio/:id',/** [this.validateId,*/this.findById)
+        application.post('/portfolio',/** [authorized('usuario'),*/this.save)
+        application.put('/portfolio/:id',/** [authorized('usuario'),*/this.validateId, this.replace)
+        application.patch('/portfolio/:id',/** [authorized('usuario'),*/this.update)
+        application.del('/portfolio/:id',/** [authorized('usuario'),*/this.validateId, this.delete)
     }
 }
 

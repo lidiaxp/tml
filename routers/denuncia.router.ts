@@ -18,12 +18,12 @@ class DenunciaRouter extends ModelRouter<Denuncia>{
           }
 
     applyRoutes(application: restify.Server) {
-        application.get('/denuncia',[authorized('usuario'),this.findAll])
-        application.get('/denuncia/:id',[authorized('usuario'),this.validateId,this.findById])
-        application.post('/denuncia',[authorized('usuario'),this.save])
-        application.put('/denuncia/:id',[authorized('usuario'),this.validateId, this.replace])
-        application.patch('/denuncia/:id',[authorized('usuario'),this.validateId, this.update])
-        application.del('/denuncia/:id',[authorized('usuario'),this.validateId, this.delete])
+        application.get('/denuncia',/** [authorized('usuario'),*/this.findAll)
+        application.get('/denuncia/:id',/** [authorized('usuario'),*/this.validateId,this.findById)
+        application.post('/denuncia',/** [authorized('usuario'),*/this.save)
+        application.put('/denuncia/:id',/** [authorized('usuario'),*/this.validateId, this.replace)
+        application.patch('/denuncia/:id',/** [authorized('usuario'),*/this.validateId, this.update)
+        application.del('/denuncia/:id',/** [authorized('usuario'),*/this.validateId, this.delete)
     }
 }
 

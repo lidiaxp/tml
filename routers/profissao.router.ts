@@ -18,12 +18,12 @@ class ProfissaoRouter extends ModelRouter<Profissao>{
           }
 
     applyRoutes(application: restify.Server) {
-        application.get('/profissao',[authorized('usuario'),this.findAll])
-        application.get('/profissao/:id',[authorized('usuario'),this.validateId,this.findById])
-        application.post('/profissao',[authorized('usuario'),this.save])
-        application.put('/profissao/:id',[authorized('usuario'),this.validateId, this.replace])
-        application.patch('/profissao/:id',[authorized('usuario'),this.validateId, this.update])
-        application.del('/profissao/:id',[authorized('usuario'),this.validateId, this.delete])
+        application.get('/profissao',/** [authorized('usuario'),*/this.findAll)
+        application.get('/profissao/:id',/** [authorized('usuario'),*/this.validateId,this.findById)
+        application.post('/profissao',/** [authorized('usuario'),*/this.save)
+        application.put('/profissao/:id',/** [authorized('usuario'),*/this.validateId, this.replace)
+        application.patch('/profissao/:id',/** [authorized('usuario'),*/this.validateId, this.update)
+        application.del('/profissao/:id',/** [authorized('usuario'),*/this.validateId, this.delete)
     }
 }
 
