@@ -10,7 +10,7 @@ exports.authenticate = (req, resp, next) => {
     const { email, senha } = req.body; // informações que vem do request
     usuario_model_1.Usuario.findByEmail(email, '+senha').then(usuario => {
         // verificar se existe um usuario com aquele email
-        if (usuario && usuario.senha) {
+        if (usuario && usuario.senha) { // se o usuario existir 
             // gerar token 
             const token = jwt.sign({ Sub: usuario.email, iss: 'misslaura' }, environment_1.environment.security.apiSecret);
             resp.json({ nome: usuario.nome, email: usuario.email, acessToken: token });
